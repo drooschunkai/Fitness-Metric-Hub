@@ -69,7 +69,7 @@ export function BmiCalculator() {
               <div>
                 <label className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   <span>Weight</span>
-                  <span className="text-emerald-600 font-bold">{weight} kg</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">{weight} kg</span>
                 </label>
                 <input
                   type="range"
@@ -84,7 +84,7 @@ export function BmiCalculator() {
               <div>
                 <label className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   <span>Height</span>
-                  <span className="text-emerald-600 font-bold">{heightCm} cm</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">{heightCm} cm</span>
                 </label>
                 <input
                   type="range"
@@ -102,7 +102,7 @@ export function BmiCalculator() {
               <div>
                 <label className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   <span>Weight</span>
-                  <span className="text-emerald-600 font-bold">{weightLbs} lbs</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">{weightLbs} lbs</span>
                 </label>
                 <input
                   type="range"
@@ -146,7 +146,7 @@ export function BmiCalculator() {
 
         {/* Dynamic Display Results */}
         <div className="border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/30 rounded-2xl p-6 flex flex-col justify-center items-center text-center">
-          <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">Calculated Body Mass Index</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Calculated Body Mass Index</span>
           <span className="text-5xl font-extrabold text-gray-950 dark:text-white mt-2" id="bmi-result-val">
             {bmiFixed > 0 ? bmiFixed : '--'}
           </span>
@@ -157,7 +157,7 @@ export function BmiCalculator() {
 
           {/* Graphical slider track */}
           <div className="w-full mt-6">
-            <div className="flex justify-between text-[10px] text-gray-400 font-bold mb-1">
+            <div className="flex justify-between text-[10px] text-slate-500 dark:text-slate-400 font-bold mb-1">
               <span>18.5</span>
               <span>25.0</span>
               <span>30.0</span>
@@ -264,7 +264,7 @@ export function BmrCalculator() {
           <div>
             <label className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               <span>Age</span>
-              <span className="text-emerald-600 font-bold">{age} years</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-bold">{age} years</span>
             </label>
             <input
               type="range"
@@ -282,7 +282,7 @@ export function BmrCalculator() {
               <div>
                 <label className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   <span>Weight</span>
-                  <span className="text-emerald-600 font-bold">{weight} kg</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">{weight} kg</span>
                 </label>
                 <input
                   type="range"
@@ -297,7 +297,7 @@ export function BmrCalculator() {
               <div>
                 <label className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   <span>Height</span>
-                  <span className="text-emerald-600 font-bold">{height} cm</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">{height} cm</span>
                 </label>
                 <input
                   type="range"
@@ -315,7 +315,7 @@ export function BmrCalculator() {
               <div>
                 <label className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   <span>Weight</span>
-                  <span className="text-emerald-600 font-bold">{weightLbs} lbs</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">{weightLbs} lbs</span>
                 </label>
                 <input
                   type="range"
@@ -358,9 +358,9 @@ export function BmrCalculator() {
         </div>
 
         <div className="border border-gray-100 dark:border-gray-800 bg-emerald-50/10 dark:bg-emerald-950/5 rounded-2xl p-6 flex flex-col justify-center items-center text-center">
-          <span className="text-xs text-emerald-600 font-bold uppercase tracking-widest">Calculated Basal Metabolic Rate</span>
+          <span className="text-xs text-emerald-700 dark:text-emerald-400 font-bold uppercase tracking-widest">Calculated Basal Metabolic Rate</span>
           <span className="text-5xl font-extrabold text-gray-950 dark:text-white mt-2" id="bmr-result-val">
-            {bmrVal > 0 ? bmrVal : '--'} <span className="text-xl font-medium text-gray-400">kcal/day</span>
+            {bmrVal > 0 ? bmrVal : '--'} <span className="text-xl font-medium text-slate-500 dark:text-slate-400">kcal/day</span>
           </span>
           <p className="text-xs text-gray-500 mt-4 leading-relaxed max-w-xs">
             This represents your daily energy cost strictly to preserve visceral systems at complete rest without taking into account physical motion.
@@ -478,7 +478,7 @@ export function CalorieCalculator() {
                     <div className="text-xs font-bold">{act.label}</div>
                     <div className="text-[10px] text-gray-500 leading-none">{act.desc}</div>
                   </div>
-                  <span className="text-xs text-gray-400 font-mono">x{act.multiplier}</span>
+                  <span className="text-xs text-slate-500 dark:text-gray-400 font-mono">x{act.multiplier}</span>
                 </button>
               ))}
             </div>
@@ -488,9 +488,9 @@ export function CalorieCalculator() {
         {/* Action Goal calorie values */}
         <div className="space-y-4">
           <div className="border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/20 rounded-2xl p-6 text-center">
-            <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Maintenance Energy (TDEE)</span>
+            <span className="text-xs text-slate-500 dark:text-gray-400 font-bold uppercase tracking-wider">Maintenance Energy (TDEE)</span>
             <div className="text-4xl font-extrabold text-gray-950 dark:text-white mt-1">
-              {tdee > 0 ? tdee : '--'} <span className="text-base font-medium text-gray-400">kcal/day</span>
+              {tdee > 0 ? tdee : '--'} <span className="text-base font-medium text-slate-500 dark:text-gray-400">kcal/day</span>
             </div>
           </div>
 
@@ -498,20 +498,20 @@ export function CalorieCalculator() {
             <div className="flex justify-between items-center p-3.5 border border-emerald-100 bg-emerald-50/10 dark:border-emerald-900/20 dark:bg-emerald-950/5 rounded-xl">
               <div>
                 <span className="block text-xs font-extrabold text-emerald-800 dark:text-emerald-400 uppercase tracking-wide">Gradual Weight Loss (-500 kcal)</span>
-                <span className="text-[10px] text-gray-400">Target to lose ~1 lb (0.5 kg) a week</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400">Target to lose ~1 lb (0.5 kg) a week</span>
               </div>
               <div className="text-xl font-bold text-gray-900 dark:text-white">
-                {tdee > 500 ? tdee - 500 : '--'} <span className="text-xs text-gray-400">kcal</span>
+                {tdee > 500 ? tdee - 500 : '--'} <span className="text-xs text-slate-500 dark:text-gray-400">kcal</span>
               </div>
             </div>
 
             <div className="flex justify-between items-center p-3.5 border border-blue-100 bg-blue-50/10 dark:border-blue-900/20 dark:bg-blue-950/5 rounded-xl">
               <div>
                 <span className="block text-xs font-extrabold text-blue-800 dark:text-blue-400 uppercase tracking-wide">Lean Muscle Gain (+300 kcal)</span>
-                <span className="text-[10px] text-gray-400">Support muscular hypertrophy</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400">Support muscular hypertrophy</span>
               </div>
               <div className="text-xl font-bold text-gray-900 dark:text-white">
-                {tdee > 0 ? tdee + 300 : '--'} <span className="text-xs text-gray-400">kcal</span>
+                {tdee > 0 ? tdee + 300 : '--'} <span className="text-xs text-slate-500 dark:text-gray-400">kcal</span>
               </div>
             </div>
           </div>
@@ -595,11 +595,11 @@ export function ProteinCalculator() {
         </div>
 
         <div className="border border-emerald-100 bg-emerald-50/10 rounded-2xl p-6 text-center flex flex-col justify-center items-center">
-          <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Optimal Daily Protein Intake</span>
+          <span className="text-xs text-slate-500 dark:text-gray-400 font-bold uppercase tracking-wider">Optimal Daily Protein Intake</span>
           <div className="text-4xl font-extrabold text-gray-950 dark:text-white mt-2" id="protein-result-val">
             {Math.round(minP)}g – {Math.round(maxP)}g
           </div>
-          <span className="text-xs text-gray-400 font-semibold block mt-1">per day</span>
+          <span className="text-xs text-slate-500 dark:text-gray-400 font-semibold block mt-1">per day</span>
 
           <p className="text-xs text-gray-500 mt-4 max-w-xs">
             A high-protein setup preserves lean mass during fat loss and feeds muscle hypertrophy when lifting weights.
@@ -666,18 +666,18 @@ export function WaterCalculator() {
         </div>
 
         <div className="border border-blue-100 bg-blue-50/10 dark:border-blue-900/10 dark:bg-blue-950/5 rounded-2xl p-6 text-center">
-          <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Recommended Daily Fluid Intake</span>
+          <span className="text-xs text-slate-500 dark:text-gray-400 font-bold uppercase tracking-wider">Recommended Daily Fluid Intake</span>
           <div className="text-5xl font-extrabold text-blue-600 dark:text-blue-400 mt-2" id="water-result-val">
-            {totalLiters} <span className="text-xl font-medium text-gray-400">Liters</span>
+            {totalLiters} <span className="text-xl font-medium text-slate-500 dark:text-gray-400">Liters</span>
           </div>
           
           <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-dashed border-gray-200 dark:border-gray-800">
             <div className="text-center">
-              <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">US Fluid Ounces</span>
+              <span className="text-[10px] text-slate-500 dark:text-gray-400 uppercase font-bold tracking-wider">US Fluid Ounces</span>
               <span className="block text-lg font-bold text-gray-800 dark:text-gray-200 mt-0.5">{totalOunces} oz</span>
             </div>
             <div className="text-center">
-              <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Standard Glasses</span>
+              <span className="text-[10px] text-slate-500 dark:text-gray-400 uppercase font-bold tracking-wider">Standard Glasses</span>
               <span className="block text-lg font-bold text-gray-800 dark:text-gray-200 mt-0.5">~{totalCups} cups</span>
             </div>
           </div>
@@ -729,7 +729,7 @@ export function BodyFatCalculator() {
           <div>
             <label className="flex justify-between text-xs font-bold text-gray-500 mb-1">
               <span>Height</span>
-              <span className="text-emerald-600 font-semibold">{heightCm} cm</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{heightCm} cm</span>
             </label>
             <input type="range" min="130" max="220" value={heightCm} onChange={(e) => setHeightCm(Number(e.target.value))} className="w-full h-1.5 bg-gray-100 rounded-lg cursor-pointer accent-emerald-500" />
           </div>
@@ -737,7 +737,7 @@ export function BodyFatCalculator() {
           <div>
             <label className="flex justify-between text-xs font-bold text-gray-500 mb-1">
               <span>Neck Circumference</span>
-              <span className="text-emerald-600 font-semibold">{neckCm} cm</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{neckCm} cm</span>
             </label>
             <input type="range" min="25" max="55" value={neckCm} onChange={(e) => setNeckCm(Number(e.target.value))} className="w-full h-1.5 bg-gray-100 rounded-lg cursor-pointer accent-emerald-500" />
           </div>
@@ -745,7 +745,7 @@ export function BodyFatCalculator() {
           <div>
             <label className="flex justify-between text-xs font-bold text-gray-500 mb-1">
               <span>Waist Circumference</span>
-              <span className="text-emerald-600 font-semibold">{waistCm} cm</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{waistCm} cm</span>
             </label>
             <input type="range" min="50" max="140" value={waistCm} onChange={(e) => setWaistCm(Number(e.target.value))} className="w-full h-1.5 bg-gray-100 rounded-lg cursor-pointer accent-emerald-500" />
           </div>
@@ -754,7 +754,7 @@ export function BodyFatCalculator() {
             <div>
               <label className="flex justify-between text-xs font-bold text-gray-500 mb-1">
                 <span>Hip Circumference</span>
-                <span className="text-emerald-600 font-semibold">{hipCm} cm</span>
+                <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{hipCm} cm</span>
               </label>
               <input type="range" min="60" max="150" value={hipCm} onChange={(e) => setHipCm(Number(e.target.value))} className="w-full h-1.5 bg-gray-100 rounded-lg cursor-pointer accent-emerald-500" />
             </div>
@@ -762,7 +762,7 @@ export function BodyFatCalculator() {
         </div>
 
         <div className="border border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/20 rounded-2xl p-6 text-center flex flex-col justify-center items-center">
-          <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Estimated Body Fat Percentage</span>
+          <span className="text-xs text-slate-500 dark:text-gray-400 font-bold uppercase tracking-wider">Estimated Body Fat Percentage</span>
           <div className="text-5xl font-extrabold text-gray-950 dark:text-white mt-2" id="bodyfat-result-val">
             {bfVal > 0 ? `${bfVal}%` : '--'}
           </div>
@@ -808,7 +808,7 @@ export function LeanBodyMassCalculator() {
           <div>
             <label className="flex justify-between text-xs font-bold text-gray-500 mb-1">
               <span>Total Weight</span>
-              <span className="text-emerald-600 font-semibold">{weight} kg</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{weight} kg</span>
             </label>
             <input type="range" min="40" max="150" value={weight} onChange={(e) => setWeight(Number(e.target.value))} className="w-full h-1.5 bg-gray-100 rounded-lg cursor-pointer accent-emerald-500" />
           </div>
@@ -816,7 +816,7 @@ export function LeanBodyMassCalculator() {
           <div>
             <label className="flex justify-between text-xs font-bold text-gray-500 mb-1">
               <span>Height</span>
-              <span className="text-emerald-600 font-semibold">{heightCm} cm</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{heightCm} cm</span>
             </label>
             <input type="range" min="120" max="220" value={heightCm} onChange={(e) => setHeightCm(Number(e.target.value))} className="w-full h-1.5 bg-gray-100 rounded-lg cursor-pointer accent-emerald-500" />
           </div>
@@ -824,7 +824,7 @@ export function LeanBodyMassCalculator() {
 
         <div className="border border-gray-100 dark:border-gray-800 rounded-2xl p-6 bg-gray-50/50 dark:bg-gray-900/20">
           <div className="text-center mb-4">
-            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Estimated Lean Mass</span>
+            <span className="text-[10px] text-slate-500 dark:text-gray-400 font-bold uppercase tracking-wider">Estimated Lean Mass</span>
             <span className="block text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5" id="lbm-result-val">
               {lbmVal > 0 ? `${lbmVal} kg` : '--'}
             </span>
@@ -832,11 +832,11 @@ export function LeanBodyMassCalculator() {
 
           <div className="grid grid-cols-2 gap-4 pt-4 border-t border-dashed border-gray-200 dark:border-gray-800 text-center text-xs">
             <div>
-              <span className="text-gray-400 block font-bold">Body Fat Weight</span>
+              <span className="text-slate-500 dark:text-gray-400 block font-bold">Body Fat Weight</span>
               <span className="text-gray-900 dark:text-gray-200 font-bold block mt-1">{fatVal} kg</span>
             </div>
             <div>
-              <span className="text-gray-400 block font-bold">Fat Proportion</span>
+              <span className="text-slate-500 dark:text-gray-400 block font-bold">Fat Proportion</span>
               <span className="text-gray-900 dark:text-gray-200 font-bold block mt-1">~{fatPercent}%</span>
             </div>
           </div>
@@ -885,7 +885,7 @@ export function IdealWeightCalculator() {
           <div>
             <label className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               <span>Your Height</span>
-              <span className="text-emerald-600 font-bold">
+              <span className="text-emerald-700 dark:text-emerald-400 font-bold">
                 {heightCm} cm ({Math.floor(heightInches / 12)} ft {Math.round(heightInches % 12)} in)
               </span>
             </label>
@@ -899,20 +899,20 @@ export function IdealWeightCalculator() {
               id="ideal-height-slider"
             />
           </div>
-          <p className="text-xs text-gray-400 italic">
+          <p className="text-xs text-slate-500 dark:text-gray-400 italic">
             *Hamwi equation assumes a baseline healthy bone stature for heights beginning at 5 feet (152.4 cm).
           </p>
         </div>
 
         <div className="border border-emerald-100 bg-emerald-50/10 rounded-2xl p-6 text-center">
-          <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Estimated Ideal Body Weight</span>
+          <span className="text-xs text-slate-500 dark:text-gray-400 font-bold uppercase tracking-wider">Estimated Ideal Body Weight</span>
           <div className="text-5xl font-extrabold text-emerald-600 dark:text-emerald-400 mt-2" id="ideal-weight-result-val">
-            {idealWeightFixed} <span className="text-2xl font-medium text-gray-400">kg</span>
+            {idealWeightFixed} <span className="text-2xl font-medium text-slate-500 dark:text-slate-400">kg</span>
           </div>
           <span className="text-sm text-gray-500 font-semibold block mt-1">({idealWeightLbs} lbs)</span>
 
           <div className="mt-6 pt-4 border-t border-dashed border-gray-200 dark:border-gray-800 text-xs">
-            <span className="text-gray-400 block font-bold">Recommended Healthy Range (+/-10%)</span>
+            <span className="text-slate-500 dark:text-gray-400 block font-bold">Recommended Healthy Range (+/-10%)</span>
             <span className="text-gray-900 dark:text-gray-200 font-bold block mt-1">{minRangeKg} kg – {maxRangeKg} kg</span>
           </div>
         </div>
@@ -992,33 +992,33 @@ export function MacroCalculator() {
           <div className="flex justify-between items-center p-3.5 bg-red-50/25 border border-red-100 rounded-xl" id="macro-protein-output">
             <div>
               <span className="block text-xs font-extrabold text-red-700 uppercase tracking-wide">Protein (4 kcal/g)</span>
-              <span className="text-[10px] text-gray-400">{Math.round(ratios.p * 100)}% of diet</span>
+              <span className="text-[10px] text-slate-500 dark:text-gray-400">{Math.round(ratios.p * 100)}% of diet</span>
             </div>
             <div className="text-right">
               <span className="text-lg font-extrabold text-gray-900 dark:text-white block">{pG} grams</span>
-              <span className="text-[10px] text-gray-400">{Math.round(pKcal)} kcal</span>
+              <span className="text-[10px] text-slate-500 dark:text-gray-400">{Math.round(pKcal)} kcal</span>
             </div>
           </div>
 
           <div className="flex justify-between items-center p-3.5 bg-blue-50/25 border border-blue-100 rounded-xl" id="macro-carbs-output">
             <div>
               <span className="block text-xs font-extrabold text-blue-700 uppercase tracking-wide">Carbohydrates (4 kcal/g)</span>
-              <span className="text-[10px] text-gray-400">{Math.round(ratios.c * 100)}% of diet</span>
+              <span className="text-[10px] text-slate-500 dark:text-gray-400">{Math.round(ratios.c * 100)}% of diet</span>
             </div>
             <div className="text-right">
               <span className="text-lg font-extrabold text-gray-900 dark:text-white block">{cG} grams</span>
-              <span className="text-[10px] text-gray-400">{Math.round(cKcal)} kcal</span>
+              <span className="text-[10px] text-slate-500 dark:text-gray-400">{Math.round(cKcal)} kcal</span>
             </div>
           </div>
 
           <div className="flex justify-between items-center p-3.5 bg-amber-50/25 border border-amber-100 rounded-xl" id="macro-fat-output">
             <div>
               <span className="block text-xs font-extrabold text-amber-700 uppercase tracking-wide">Dietary Fats (9 kcal/g)</span>
-              <span className="text-[10px] text-gray-400">{Math.round(ratios.f * 100)}% of diet</span>
+              <span className="text-[10px] text-slate-500 dark:text-gray-400">{Math.round(ratios.f * 100)}% of diet</span>
             </div>
             <div className="text-right">
               <span className="text-lg font-extrabold text-gray-900 dark:text-white block">{fG} grams</span>
-              <span className="text-[10px] text-gray-400">{Math.round(fKcal)} kcal</span>
+              <span className="text-[10px] text-slate-500 dark:text-gray-400">{Math.round(fKcal)} kcal</span>
             </div>
           </div>
         </div>
@@ -1076,7 +1076,7 @@ export function WalkingCaloriesCalculator() {
           <div>
             <label className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               <span>Your Body Weight</span>
-              <span className="text-emerald-600 font-bold">{unit === 'metric' ? `${weightKg} kg` : `${weightLbs} lbs`}</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-bold">{unit === 'metric' ? `${weightKg} kg` : `${weightLbs} lbs`}</span>
             </label>
             <input
               type="range"
@@ -1124,18 +1124,18 @@ export function WalkingCaloriesCalculator() {
         </div>
 
         <div className="border border-indigo-100 bg-indigo-50/10 rounded-2xl p-6 text-center">
-          <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Estimated Energy Burned</span>
+          <span className="text-xs text-slate-500 dark:text-gray-400 font-bold uppercase tracking-wider">Estimated Energy Burned</span>
           <div className="text-5xl font-extrabold text-indigo-600 dark:text-indigo-400 mt-2" id="walking-result-val">
-            {caloriesVal} <span className="text-2xl font-medium text-gray-400">kcal</span>
+            {caloriesVal} <span className="text-2xl font-medium text-slate-500 dark:text-gray-400">kcal</span>
           </div>
 
           <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-dashed border-gray-200 dark:border-gray-800 text-xs">
             <div>
-              <span className="text-gray-400 block font-bold">Estimated Duration</span>
+              <span className="text-slate-500 dark:text-gray-400 block font-bold">Estimated Duration</span>
               <span className="text-gray-900 dark:text-gray-200 font-bold block mt-1">{Math.round(durationMin)} minutes</span>
             </div>
             <div>
-              <span className="text-gray-400 block font-bold">Calculated Intensity</span>
+              <span className="text-slate-500 dark:text-gray-400 block font-bold">Calculated Intensity</span>
               <span className="text-gray-900 dark:text-gray-200 font-bold block mt-1">{met.toFixed(1)} METs</span>
             </div>
           </div>

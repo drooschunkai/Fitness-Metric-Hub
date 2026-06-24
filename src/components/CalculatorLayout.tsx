@@ -41,7 +41,7 @@ export default function CalculatorLayout({ config, route, onNavigate, children }
           
           {/* Main Title and Header Details */}
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 bg-emerald-50 dark:bg-emerald-950/20 px-2.5 py-1 rounded-md">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 px-2.5 py-1 rounded-md">
               {config.category.replace('-', ' ')} tool
             </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-850 dark:text-white mt-3 tracking-tight">
@@ -108,28 +108,28 @@ export default function CalculatorLayout({ config, route, onNavigate, children }
           {/* Linked Guides / Blog Articles block */}
           {linkedGuides.length > 0 && (
             <div className="bg-white dark:bg-gray-950 border border-slate-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm">
-              <h3 className="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+              <h2 className="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2">
                 <BookOpen className="h-4.5 w-4.5 text-emerald-500" />
                 Related Reading & Guides
-              </h3>
+              </h2>
               <div className="space-y-3">
                 {linkedGuides.map((guide) => (
-                  <button
-                    key={guide.slug}
-                    onClick={() => onNavigate(`/guides/${guide.slug}`)}
-                    className="w-full text-left group flex items-start gap-2.5 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-gray-900 transition-colors cursor-pointer"
-                    id={`sidebar-guide-${guide.slug}`}
-                  >
-                    <ChevronRight className="h-4 w-4 text-slate-400 mt-0.5 group-hover:text-emerald-500 transition-colors" />
-                    <div>
-                      <div className="text-sm font-semibold text-slate-700 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                        {guide.title}
-                      </div>
-                      <span className="text-[10px] text-slate-400 block mt-0.5">
-                        {guide.readTime} • {guide.author}
-                      </span>
-                    </div>
-                  </button>
+                   <button
+                     key={guide.slug}
+                     onClick={() => onNavigate(`/guides/${guide.slug}`)}
+                     className="w-full text-left group flex items-start gap-2.5 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-gray-900 transition-colors cursor-pointer"
+                     id={`sidebar-guide-${guide.slug}`}
+                   >
+                     <ChevronRight className="h-4 w-4 text-slate-400 mt-0.5 group-hover:text-emerald-500 transition-colors" />
+                     <div>
+                       <div className="text-sm font-semibold text-slate-700 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                         {guide.title}
+                       </div>
+                       <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-0.5">
+                         {guide.readTime} • {guide.author}
+                       </span>
+                     </div>
+                   </button>
                 ))}
               </div>
             </div>
@@ -140,9 +140,9 @@ export default function CalculatorLayout({ config, route, onNavigate, children }
 
           {/* Top Calculators Quick Links Widget */}
           <div className="bg-white dark:bg-gray-950 border border-slate-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-4">
+            <h2 className="text-sm font-bold text-slate-800 dark:text-white uppercase tracking-wider mb-4">
               Top Calculators Suite
-            </h3>
+            </h2>
             <div className="space-y-2">
               {CALCULATORS.filter(c => c.slug !== config.slug).slice(0, 5).map((calc) => (
                 <button

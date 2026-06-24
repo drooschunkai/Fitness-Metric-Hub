@@ -10,13 +10,13 @@ export default function Footer({ onNavigate }: FooterProps) {
   return (
     <footer className="bg-white text-slate-600 border-t border-slate-200 dark:bg-slate-950 dark:border-slate-800" id="main-footer">
       {/* Upper Footer section */}
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-8">
         
         {/* Brand statement */}
-        <div className="md:col-span-2">
+        <div className="md:col-span-4 space-y-4">
           <button
             onClick={() => onNavigate('/')}
-            className="flex items-center gap-2 text-slate-900 hover:text-emerald-600 dark:text-white dark:hover:text-emerald-400 transition-colors mb-4 cursor-pointer text-left"
+            className="flex items-center gap-2 text-slate-900 hover:text-emerald-600 dark:text-white dark:hover:text-emerald-400 transition-colors cursor-pointer text-left"
             id="footer-logo-btn"
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500 text-white">
@@ -29,43 +29,107 @@ export default function Footer({ onNavigate }: FooterProps) {
           <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
             FitMetricsHub provides premium, mathematically accurate fitness and health calculators modeled after peer-reviewed clinical energy expenditure literature.
           </p>
-          <div className="mt-4 flex items-center gap-1.5 text-xs text-amber-600 dark:text-amber-500 font-semibold">
+          <div className="flex items-center gap-1.5 text-xs text-amber-600 dark:text-amber-500 font-semibold">
             <ShieldCheck className="h-4 w-4 shrink-0" />
             <span>AdSense Compliant Content & Privacy Assured.</span>
           </div>
         </div>
 
-        {/* Dynamic Calculator Shortcuts */}
-        <div>
+        {/* 1. Calculators Column */}
+        <div className="md:col-span-2">
           <h3 className="text-xs font-bold text-slate-950 dark:text-white uppercase tracking-wider mb-3">Calculators</h3>
-          <ul className="space-y-1.5 text-xs">
+          <ul className="space-y-2 text-xs">
             <li>
               <button onClick={() => onNavigate('/calculators/bmi-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
-                BMI Weight Calculator
-              </button>
-            </li>
-            <li>
-              <button onClick={() => onNavigate('/calculators/bmr-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
-                BMR Metabolic Estimator
+                BMI Calculator
               </button>
             </li>
             <li>
               <button onClick={() => onNavigate('/calculators/calorie-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
-                TDEE Calorie Calculator
+                Calorie Calculator
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavigate('/calculators/protein-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                Protein Calculator
               </button>
             </li>
             <li>
               <button onClick={() => onNavigate('/calculators/macro-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
-                Macronutrient Ratios
+                Macro Calculator
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavigate('/calculators/body-fat-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                Body Fat Calculator
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavigate('/calculators/water-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                Water Intake Calculator
               </button>
             </li>
           </ul>
         </div>
 
-        {/* Legal & Policy compliance links */}
-        <div>
-          <h3 className="text-xs font-bold text-slate-950 dark:text-white uppercase tracking-wider mb-3">Legal & Policies</h3>
-          <ul className="space-y-1.5 text-xs">
+        {/* 2. Guides Column */}
+        <div className="md:col-span-2">
+          <h3 className="text-xs font-bold text-slate-950 dark:text-white uppercase tracking-wider mb-3">Guides</h3>
+          <ul className="space-y-2 text-xs">
+            <li>
+              <button onClick={() => onNavigate('/guides/what-is-bmi')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                What Is BMI?
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavigate('/guides/how-many-calories-should-i-eat')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                Understanding BMR
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavigate('/guides/protein-intake-guide')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                Protein Intake Guide
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavigate('/guides/understanding-body-fat-percentage')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                Body Fat Guide
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavigate('/guides/weight-loss-fundamentals')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                Weight Loss Guide
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        {/* 3. Company Column */}
+        <div className="md:col-span-2">
+          <h3 className="text-xs font-bold text-slate-950 dark:text-white uppercase tracking-wider mb-3">Company</h3>
+          <ul className="space-y-2 text-xs">
+            <li>
+              <button onClick={() => onNavigate('/about')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                About Us
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavigate('/contact')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                Contact
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavigate('/about')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                Methodology & Science
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        {/* 4. Legal Column */}
+        <div className="md:col-span-2">
+          <h3 className="text-xs font-bold text-slate-950 dark:text-white uppercase tracking-wider mb-3">Legal</h3>
+          <ul className="space-y-2 text-xs">
             <li>
               <button onClick={() => onNavigate('/privacy')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left" id="footer-privacy-btn">
                 Privacy Policy
@@ -81,13 +145,9 @@ export default function Footer({ onNavigate }: FooterProps) {
                 Medical Disclaimer
               </button>
             </li>
-            <li>
-              <button onClick={() => onNavigate('/about')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer text-left">
-                Methodology & Contact
-              </button>
-            </li>
           </ul>
         </div>
+
       </div>
 
       {/* Medical disclaimer mandated by AdSense and health guidelines */}

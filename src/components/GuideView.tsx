@@ -43,10 +43,10 @@ export default function GuideView({ article, route, onNavigate }: GuideViewProps
         {/* Left Side Table of Contents sticky panel - Desktop only */}
         <div className="hidden lg:block space-y-6">
           <div className="sticky top-24 bg-white dark:bg-gray-950 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-xs">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-1.5">
+            <h2 className="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-1.5">
               <BookOpen className="h-3.5 w-3.5" />
               Table of Contents
-            </h3>
+            </h2>
             <nav className="space-y-2.5">
               {article.toc.map((item) => (
                 <button
@@ -114,10 +114,10 @@ export default function GuideView({ article, route, onNavigate }: GuideViewProps
           {/* Linked Tools Carousel/Grid */}
           {linkedCalculators.length > 0 && (
             <div className="pt-6 border-t border-gray-100 dark:border-gray-800/80">
-              <h3 className="text-lg font-bold text-gray-950 dark:text-white mb-4 flex items-center gap-2">
+              <h2 className="text-lg font-bold text-gray-950 dark:text-white mb-4 flex items-center gap-2">
                 <Scale className="h-5 w-5 text-emerald-500" />
                 Recommended Interactive Tools for this Article
-              </h3>
+              </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {linkedCalculators.map((calc) => (
                   <CalculatorCard

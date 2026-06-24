@@ -102,7 +102,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
                   }`}
                   id={`mobile-nav-link-${link.path.replace('/', 'root')}`}
                 >
-                  {LinkIcon && <LinkIcon className={`h-4.5 w-4.5 ${isActive ? 'text-white' : 'text-gray-400'}`} />}
+                  {LinkIcon && <LinkIcon className={`h-4.5 w-4.5 ${isActive ? 'text-white' : 'text-slate-500 dark:text-gray-400'}`} />}
                   <span>{link.label}</span>
                 </button>
               );

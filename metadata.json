@@ -1,0 +1,6 @@
+{
+  "name": "FitMetricsHub",
+  "description": "Smart Fitness Calculators for Better Health Decisions - BMI, BMR, Calorie, Protein, Water, Body Fat, and more.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

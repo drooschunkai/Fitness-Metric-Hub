@@ -4,20 +4,11 @@ import { Mail, ShieldCheck, FileText, Send, CheckCircle2, ShieldAlert } from 'lu
 /* ==========================================================
    ABOUT PAGE & CONTACT FORM
    ========================================================== */
-export function AboutPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+export interface StaticPageProps {
+  onNavigate?: (path: string) => void;
+}
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
-      setSubmitted(true);
-      setTimeout(() => {
-        setFormData({ name: '', email: '', message: '' });
-      }, 3000);
-    }
-  };
-
+export function AboutPage({ onNavigate }: StaticPageProps) {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 space-y-12 animate-in fade-in duration-300" id="about-page">
       {/* Hero Header */}
@@ -34,20 +25,20 @@ export function AboutPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
         <div className="space-y-4">
           <h2 className="text-2xl font-bold text-gray-950 dark:text-white">Our Mission</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed text-justify">
             At FitMetricsHub, we believe that fitness should not be a guessing game. Our goal is to consolidate highly accurate, clinically validated health calculators and metrics into a unified, lightning-fast platform. 
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed text-justify">
             By making scientific calculations accessible and easy to understand, we empower gym enthusiasts, nutritionists, beginners, and health seekers to optimize their diets, plan hydration, and track metrics accurately.
           </p>
         </div>
 
         <div className="space-y-4">
           <h2 className="text-2xl font-bold text-gray-950 dark:text-white">Methodology & Accuracy</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed text-justify">
             Our calculators utilize peer-reviewed clinical equations established in nutritional biology:
           </p>
-          <ul className="list-disc list-inside space-y-1 text-xs text-gray-600 dark:text-gray-400">
+          <ul className="list-disc list-inside space-y-2 text-xs text-gray-600 dark:text-gray-400">
             <li><strong>Basal Metabolism (BMR):</strong> Mifflin-St Jeor Equation (1990)</li>
             <li><strong>Lean Mass / Fat Mass:</strong> Boer Formula (1984)</li>
             <li><strong>Body Fat Analysis:</strong> US Navy Circumference regression models</li>
@@ -56,66 +47,103 @@ export function AboutPage() {
         </div>
       </div>
 
-      {/* Interactive Contact Form Panel */}
-      <section className="bg-white dark:bg-gray-950 border border-gray-100 dark:border-gray-800 rounded-3xl p-8 shadow-xs">
-        <div className="max-w-xl mx-auto">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-950 dark:text-white">Connect with Our Team</h2>
-            <p className="text-xs text-gray-500 mt-1">Have methodology queries or advertising feedback? Get in touch.</p>
+      {/* Elegant CTA block to Contact page */}
+      {onNavigate && (
+        <div className="bg-slate-50 dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-8 text-center space-y-4">
+          <h3 className="text-xl font-bold text-gray-950 dark:text-white">Have Questions or Feedback?</h3>
+          <p className="text-sm text-gray-500 max-w-lg mx-auto leading-relaxed">
+            Whether you have methodology queries, business inquiries, or feature suggestions, we are always open to hearing from our community.
+          </p>
+          <button
+            onClick={() => onNavigate('/contact')}
+            className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-sm transition-all cursor-pointer text-sm"
+          >
+            <Mail className="h-4 w-4" />
+            <span>Go to Contact Page</span>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function ContactPage() {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.name && formData.email && formData.message) {
+      setSubmitted(true);
+      setTimeout(() => {
+        setFormData({ name: '', email: '', message: '' });
+      }, 3000);
+    }
+  };
+
+  return (
+    <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8 space-y-8 animate-in fade-in duration-300" id="contact-page">
+      <div className="text-center">
+        <h1 className="text-4xl font-extrabold text-gray-950 dark:text-white tracking-tight">
+          Contact Us
+        </h1>
+        <p className="text-sm text-gray-500 mt-2">
+          Have methodology queries or advertising feedback? Get in touch with our team.
+        </p>
+      </div>
+
+      <section className="bg-white dark:bg-gray-950 border border-slate-200 dark:border-gray-800 rounded-2xl p-8 shadow-sm">
+        {submitted ? (
+          <div className="p-6 bg-emerald-50 border border-emerald-100 rounded-2xl text-center space-y-2">
+            <CheckCircle2 className="h-10 w-10 text-emerald-600 mx-auto animate-bounce" />
+            <h3 className="font-bold text-emerald-950">Message Sent Successfully!</h3>
+            <p className="text-xs text-emerald-700">Thank you for reaching out. A certified dietitian on our staff will respond within 48 hours.</p>
           </div>
-
-          {submitted ? (
-            <div className="p-6 bg-emerald-50 border border-emerald-100 rounded-2xl text-center space-y-2">
-              <CheckCircle2 className="h-10 w-10 text-emerald-600 mx-auto" />
-              <h3 className="font-bold text-emerald-950">Message Sent Successfully!</h3>
-              <p className="text-xs text-emerald-700">Thank you for reaching out. A certified dietitian on our staff will respond within 48 hours.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Your Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-800 rounded-xl bg-gray-50 focus:bg-white focus:outline-emerald-500 text-sm"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Email Address</label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-800 rounded-xl bg-gray-50 focus:bg-white focus:outline-emerald-500 text-sm"
-                  />
-                </div>
-              </div>
-
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Your Message</label>
-                <textarea
-                  rows={4}
+                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Your Name</label>
+                <input
+                  type="text"
                   required
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-800 rounded-xl bg-gray-50 focus:bg-white focus:outline-emerald-500 text-sm"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-2.5 border border-slate-200 dark:border-gray-800 rounded-lg bg-slate-50 focus:bg-white focus:outline-emerald-500 text-sm"
                 />
               </div>
+              <div>
+                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Email Address</label>
+                <input
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-2.5 border border-slate-200 dark:border-gray-800 rounded-lg bg-slate-50 focus:bg-white focus:outline-emerald-500 text-sm"
+                />
+              </div>
+            </div>
 
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-xs transition-all cursor-pointer"
-              >
-                <Send className="h-4 w-4" />
-                <span>Send Message</span>
-              </button>
-            </form>
-          )}
-        </div>
+            <div>
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Your Message</label>
+              <textarea
+                rows={4}
+                required
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="w-full px-4 py-2.5 border border-slate-200 dark:border-gray-800 rounded-lg bg-slate-50 focus:bg-white focus:outline-emerald-500 text-sm"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow-sm transition-all cursor-pointer"
+            >
+              <Send className="h-4 w-4" />
+              <span>Send Message</span>
+            </button>
+          </form>
+        )}
       </section>
     </div>
   );

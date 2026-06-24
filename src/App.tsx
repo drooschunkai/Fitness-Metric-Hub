@@ -5,7 +5,7 @@ import SEOOverview from './components/SEOOverview';
 import Homepage from './components/Homepage';
 import CalculatorLayout from './components/CalculatorLayout';
 import GuideView from './components/GuideView';
-import { AboutPage, PrivacyPolicy, TermsOfService, DisclaimerPage } from './components/StaticPages';
+import { AboutPage, ContactPage, PrivacyPolicy, TermsOfService, DisclaimerPage } from './components/StaticPages';
 import { CALCULATORS } from './data/calculators';
 import { GUIDES } from './data/guides';
 import { RouteState } from './types';
@@ -70,8 +70,12 @@ export default function App() {
       return <Homepage onNavigate={navigate} />;
     }
 
-    if (currentPath === '/about' || currentPath === '/contact') {
-      return <AboutPage />;
+    if (currentPath === '/about') {
+      return <AboutPage onNavigate={navigate} />;
+    }
+
+    if (currentPath === '/contact') {
+      return <ContactPage />;
     }
 
     if (currentPath === '/privacy') {
@@ -126,7 +130,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
       {/* Sticky header containing logo & menu triggers */}
       <Header currentPath={currentPath} onNavigate={navigate} />
 

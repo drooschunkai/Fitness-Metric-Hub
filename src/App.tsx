@@ -30,19 +30,32 @@ import {
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
-    // Treat any hash path or standard route pathname cleanly
+    // Support both standard route pathname and hash-based routing fallbacks cleanly
+    const hash = window.location.hash;
+    if (hash && hash.startsWith('#')) {
+      return hash.slice(1) || '/';
+    }
     return window.location.pathname || '/';
   });
 
   const [inspectorOpen, setInspectorOpen] = useState(false);
 
-  // Sync back-forward history navigation
+  // Sync back-forward history navigation and hash changes
   useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname || '/');
+    const handleNavigation = () => {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#')) {
+        setCurrentPath(hash.slice(1) || '/');
+      } else {
+        setCurrentPath(window.location.pathname || '/');
+      }
     };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', handleNavigation);
+    window.addEventListener('hashchange', handleNavigation);
+    return () => {
+      window.removeEventListener('popstate', handleNavigation);
+      window.removeEventListener('hashchange', handleNavigation);
+    };
   }, []);
 
   // Automated SEO & Schema Injection Engine
@@ -168,7 +181,12 @@ export default function App() {
   }, [currentPath]);
 
   const navigate = (path: string) => {
-    window.history.pushState(null, '', path);
+    const isHashRouting = window.location.hash.startsWith('#') || window.location.pathname.includes('index.html');
+    if (isHashRouting) {
+      window.location.hash = path;
+    } else {
+      window.history.pushState(null, '', path);
+    }
     setCurrentPath(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

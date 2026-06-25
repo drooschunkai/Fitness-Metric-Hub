@@ -3,12 +3,16 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import SEOOverview from './components/SEOOverview';
 import Homepage from './components/Homepage';
+import CalculatorsPage from './components/CalculatorsPage';
 import CalculatorLayout from './components/CalculatorLayout';
 import GuideView from './components/GuideView';
+import SitemapPage from './components/SitemapPage';
 import { AboutPage, ContactPage, PrivacyPolicy, TermsOfService, DisclaimerPage } from './components/StaticPages';
 import { CALCULATORS } from './data/calculators';
 import { GUIDES } from './data/guides';
 import { RouteState } from './types';
+import DynamicCalculator from './components/DynamicCalculator';
+import { SearchResultsPage, CategoryPage, TagPage } from './components/SearchAndCategoryPages';
 
 // Import Calculators
 import {
@@ -40,6 +44,128 @@ export default function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // Automated SEO & Schema Injection Engine
+  useEffect(() => {
+    let title = 'FitMetricsHub - Free Fitness Calculators & Health Tools';
+    let desc = 'Calculate BMI, calories, protein intake, body fat, macros and more with scientifically accurate clinical models.';
+    let jsonLd: any = {};
+    const currentUrl = `https://fitmetricshub.com${currentPath}`;
+
+    if (currentPath === '/' || currentPath === '/index.html' || currentPath === '') {
+      title = 'FitMetricsHub - Smart Fitness Calculators for Better Health Decisions';
+      desc = 'Discover the absolute best suite of free health calculators. Scientifically estimate your BMI, daily calorie limits, macro ratios, body fat, protein, and water needs.';
+      jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        'name': 'FitMetricsHub',
+        'url': 'https://fitmetricshub.com',
+        'description': desc,
+        'potentialAction': {
+          '@type': 'SearchAction',
+          'target': 'https://fitmetricshub.com/search?q={search_term_string}',
+          'query-input': 'required name=search_term_string'
+        }
+      };
+    } else if (currentPath.startsWith('/calculators/')) {
+      const slug = currentPath.split('/calculators/')[1];
+      const calc = CALCULATORS.find(c => c.slug === slug);
+      if (calc) {
+        title = `${calc.title} - Free Health & Fitness Estimator | FitMetricsHub`;
+        desc = calc.metaDescription;
+        jsonLd = {
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          'name': calc.title,
+          'url': currentUrl,
+          'applicationCategory': 'HealthAndFitnessApplication',
+          'operatingSystem': 'All',
+          'browserRequirements': 'Requires HTML5 and JavaScript support',
+          'description': calc.shortDescription,
+          'creator': {
+            '@type': 'Organization',
+            'name': 'FitMetricsHub',
+            'url': 'https://fitmetricshub.com'
+          },
+          'about': {
+            '@type': 'Thing',
+            'name': calc.title,
+            'description': 'Online clinical calculator for fitness indices'
+          }
+        };
+      }
+    } else if (currentPath.startsWith('/guides/')) {
+      const slug = currentPath.split('/guides/')[1];
+      const guide = GUIDES.find(g => g.slug === slug);
+      if (guide) {
+        title = `${guide.title} | FitMetricsHub Guide`;
+        desc = guide.metaDescription;
+        jsonLd = {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          'headline': guide.title,
+          'description': guide.metaDescription,
+          'url': currentUrl,
+          'datePublished': guide.publishedDate,
+          'author': {
+            '@type': 'Person',
+            'name': guide.author
+          },
+          'publisher': {
+            '@type': 'Organization',
+            'name': 'FitMetricsHub',
+            'logo': {
+              '@type': 'ImageObject',
+              'url': 'https://fitmetricshub.com/assets/logo.png'
+            }
+          },
+          'mainEntityOfPage': {
+            '@type': 'WebPage',
+            '@id': currentUrl
+          }
+        };
+      }
+    } else {
+      const sub = currentPath.replace('/', '');
+      const capitalized = sub ? sub.charAt(0).toUpperCase() + sub.slice(1) : 'Health';
+      title = `${capitalized} - FitMetricsHub`;
+      desc = `FitMetricsHub official ${sub} information and tools designed for clinical precision.`;
+    }
+
+    // Set document title
+    document.title = title;
+
+    // Set or create Meta Description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', desc);
+
+    // Set or create Canonical Link
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', currentUrl);
+
+    // Inject JSON-LD Schema Script
+    let schemaScript = document.getElementById('dynamic-jsonld-schema');
+    if (schemaScript) {
+      schemaScript.remove();
+    }
+    if (Object.keys(jsonLd).length > 0) {
+      schemaScript = document.createElement('script');
+      schemaScript.setAttribute('id', 'dynamic-jsonld-schema');
+      schemaScript.setAttribute('type', 'application/ld+json');
+      schemaScript.innerHTML = JSON.stringify(jsonLd);
+      document.head.appendChild(schemaScript);
+    }
+  }, [currentPath]);
 
   const navigate = (path: string) => {
     window.history.pushState(null, '', path);
@@ -90,6 +216,14 @@ export default function App() {
       return <DisclaimerPage />;
     }
 
+    if (currentPath === '/sitemap') {
+      return <SitemapPage onNavigate={navigate} />;
+    }
+
+    if (currentPath === '/calculators' || currentPath === '/calculators/') {
+      return <CalculatorsPage onNavigate={navigate} />;
+    }
+
     if (currentPath.startsWith('/calculators/')) {
       const slug = currentPath.split('/calculators/')[1];
       const calcConfig = CALCULATORS.find(c => c.slug === slug);
@@ -100,7 +234,11 @@ export default function App() {
             route={{ path: currentPath, params: { slug } }}
             onNavigate={navigate}
           >
-            {getCalculatorComponent(slug)}
+            {calcConfig.isDynamic ? (
+              <DynamicCalculator config={calcConfig} />
+            ) : (
+              getCalculatorComponent(slug)
+            )}
           </CalculatorLayout>
         );
       }
@@ -118,6 +256,20 @@ export default function App() {
           />
         );
       }
+    }
+
+    if (currentPath.startsWith('/search')) {
+      return <SearchResultsPage onNavigate={navigate} />;
+    }
+
+    if (currentPath.startsWith('/categories/')) {
+      const categorySlug = currentPath.split('/categories/')[1];
+      return <CategoryPage categorySlug={categorySlug} onNavigate={navigate} />;
+    }
+
+    if (currentPath.startsWith('/tags/')) {
+      const tagSlug = currentPath.split('/tags/')[1];
+      return <TagPage tagSlug={tagSlug} onNavigate={navigate} />;
     }
 
     // 404 Fallback to Home

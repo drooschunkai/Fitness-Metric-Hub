@@ -9,5 +9,15 @@
 body {
   font-family: var(--font-sans);
   background-color: #ffffff; /* Pure White */
-  color: #000000; /* Slate-900 */
+  color: #000000; /* Pure Black */
+}
+
+/* Force solid black for general descriptive and secondary texts on light mode, and pure white on dark mode */
+body, p, li, label {
+  color: #000000 !important;
+}
+
+/* Maintain compatibility with dark mode class configurations */
+:is(.dark, html.dark) :is(body, p, li, label) {
+  color: #ffffff !important;
 }

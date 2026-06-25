@@ -1,4 +1,4 @@
-export type CategoryType = 'weight-management' | 'nutrition' | 'fitness-performance';
+export type CategoryType = 'weight-management' | 'nutrition' | 'fitness-performance' | 'body-composition';
 
 export interface FAQItem {
   id: string;
@@ -10,6 +10,26 @@ export interface ExampleCalculation {
   scenario: string;
   inputs: string;
   result: string;
+}
+
+export interface DynamicInput {
+  name: string;
+  label: string;
+  type: 'number' | 'select' | 'radio' | 'slider';
+  defaultValue: any;
+  min?: number;
+  max?: number;
+  step?: number;
+  unitType?: 'weight' | 'height' | 'none';
+  options?: { label: string; value: any }[];
+}
+
+export interface DynamicOutputMetric {
+  label: string;
+  valueKey: string;
+  unit?: string;
+  color?: string;
+  isCustomText?: boolean;
 }
 
 export interface CalculatorConfig {
@@ -27,6 +47,12 @@ export interface CalculatorConfig {
   faqs: FAQItem[];
   relatedSlugs: string[];
   relatedGuideSlugs: string[];
+  // Phase 8 Dynamic Properties
+  isDynamic?: boolean;
+  inputs?: DynamicInput[];
+  outputs?: DynamicOutputMetric[];
+  calculate?: (inputs: Record<string, any>, unit: 'metric' | 'imperial') => Record<string, any>;
+  resultExplanation?: (inputs: Record<string, any>, results: Record<string, any>, unit: 'metric' | 'imperial') => string;
 }
 
 export interface GuideArticle {

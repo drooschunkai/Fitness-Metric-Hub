@@ -14,8 +14,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
     { label: 'Home', path: '/' },
     { label: 'Calculators', path: '/calculators', icon: Activity },
     { label: 'About', path: '/about', icon: Info },
-    { label: 'Contact', path: '/contact', icon: Phone },
-    { label: 'Disclaimer', path: '/disclaimer', icon: HelpCircle }
+    { label: 'Contact', path: '/contact', icon: Phone }
   ];
 
   const handleLinkClick = (path: string) => {

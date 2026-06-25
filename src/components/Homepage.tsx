@@ -15,7 +15,6 @@ interface HomepageProps {
 }
 
 export default function Homepage({ onNavigate }: HomepageProps) {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'weight-management' | 'nutrition' | 'fitness-performance'>('all');
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
@@ -56,22 +55,6 @@ export default function Homepage({ onNavigate }: HomepageProps) {
     return () => clearInterval(timer);
   }, []);
 
-  React.useEffect(() => {
-    if (window.location.pathname === '/calculators') {
-      const el = document.getElementById('calculators-grid-section');
-      if (el) {
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
-      }
-    }
-  }, []);
-
-  // Filtered calculators
-  const filteredCalculators = selectedCategory === 'all'
-    ? CALCULATORS
-    : CALCULATORS.filter(c => c.category === selectedCategory);
-
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newsletterEmail) {
@@ -83,10 +66,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
   };
 
   const handleExploreClick = () => {
-    const el = document.getElementById('calculators-grid-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    onNavigate('/calculators');
   };
 
   const trustIndicators = [
@@ -127,7 +107,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
               </h1>
 
               {/* Subheadline Description */}
-              <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base text-black dark:text-white leading-relaxed max-w-2xl">
                 Calculate BMI, calories, protein intake, body fat percentage, macros, water needs, and more using science-backed fitness formulas. Fast, accurate, and completely free.
               </p>
 
@@ -328,18 +308,13 @@ export default function Homepage({ onNavigate }: HomepageProps) {
         </div>
       </section>
 
-      {/* 2. AD PLACEMENT ABOVE CALCS */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <AdPlaceholder type="top-banner" />
-      </div>
-
       {/* SECTION 1: POPULAR FITNESS CALCULATORS */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8" id="popular-calculators-section">
         <div className="text-center md:text-left">
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Popular Fitness Calculators
           </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5 max-w-2xl">
+          <p className="text-sm text-black dark:text-white mt-1.5 max-w-2xl">
             Explore our most popular and scientifically validated fitness calculators. Get instant body mass index estimation, calorie expenditure calculation, and macro distributions with zero subscriptions or sign-ups.
           </p>
         </div>
@@ -395,6 +370,17 @@ export default function Homepage({ onNavigate }: HomepageProps) {
             );
           })}
         </div>
+
+        <div className="flex justify-center pt-6">
+          <button
+            onClick={() => onNavigate('/calculators')}
+            className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-sm hover:shadow-lg cursor-pointer text-sm"
+            id="view-all-calculators-btn"
+          >
+            <span>Explore All 10+ Calculators</span>
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
       </section>
 
       {/* SECTION 2: FITNESS CALCULATOR CATEGORIES */}
@@ -403,7 +389,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Fitness Calculator Categories
           </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5 max-w-2xl">
+          <p className="text-sm text-black dark:text-white mt-1.5 max-w-2xl">
             Sift through our specialized health estimation categories to formulate your metabolic, performance, or dietary strategy.
           </p>
         </div>
@@ -412,7 +398,13 @@ export default function Homepage({ onNavigate }: HomepageProps) {
           {[
             {
               title: "Weight Management",
-              description: "Weight management calculators help estimate BMI, healthy weight ranges, calorie requirements, and realistic weight-loss targets. Accurate tracking of body mass index (BMI) is fundamental for understanding your current metabolic status and health risks. Our advanced algorithms integrate your age, gender, activity levels, and current physical indicators to calculate precise calorie targets necessary for sustainable fat reduction, lean tissue preservation, or healthy weight gain. By identifying your exact daily energy expenditure and ideal weight baseline, these clinically backed weight management metrics empower you to construct evidence-based dietary regimens, monitor weight trends, and establish progressive body mass parameters. No guessing games—just pure clinical biology applied to your specific fat loss, body maintenance, or caloric surplus goals.",
+              introduction: "Weight management calculators help estimate healthy body metrics and calorie requirements. Accurate tracking of body mass index (BMI) is fundamental for understanding your current metabolic status and health risks. Our advanced algorithms integrate your physical indicators to calculate precise calorie targets necessary for sustainable maintenance, fat reduction, or healthy mass gain.",
+              benefits: [
+                "Calculate BMI relative to height",
+                "Estimate healthy weight ranges",
+                "Plan realistic weight-loss goals"
+              ],
+              closing: "Use these science-backed tools to establish progressive body parameters and make informed health decisions.",
               links: [
                 { label: "BMI Calculator", path: "/calculators/bmi-calculator" },
                 { label: "Calorie Calculator", path: "/calculators/calorie-calculator" },
@@ -422,7 +414,13 @@ export default function Homepage({ onNavigate }: HomepageProps) {
             },
             {
               title: "Nutrition & Macros",
-              description: "Nutrition calculators help determine daily protein, carbohydrate, fat, and hydration requirements based on your goals. Macronutrient distribution is a key physiological factor in body composition reconstruction, muscle protein synthesis, and cognitive energy preservation. Our specialized macro estimators break down your precise dietary composition into grams of protein, lipids, and carbohydrates tailored to your custom activity profiles and training methodologies. Proper daily water intake calculation ensures cellular hydration, optimal joint lubrication, and efficient metabolic waste transport during high-intensity training. By optimizing your specific micro-nutrient ratios and cellular hydration metrics, you can securely fuel workouts, accelerate post-exercise muscle recovery, and support long-term metabolic health with zero nutritional deficits.",
+              introduction: "Proper nutrition and macro distribution are key physiological factors in body reconstruction, muscle protein synthesis, and cognitive energy preservation. Our specialized macro estimators break down your precise dietary composition into grams of protein, lipids, and carbohydrates tailored to your custom activity profiles and training methodologies.",
+              benefits: [
+                "Optimize daily protein intake",
+                "Calculate macronutrient distributions",
+                "Determine ideal hydration targets"
+              ],
+              closing: "Fuel your daily activities, accelerate recovery, and support long-term metabolic health with zero nutritional deficits.",
               links: [
                 { label: "Protein Calculator", path: "/calculators/protein-calculator" },
                 { label: "Macro Calculator", path: "/calculators/macro-calculator" },
@@ -432,7 +430,13 @@ export default function Homepage({ onNavigate }: HomepageProps) {
             },
             {
               title: "Body Composition",
-              description: "Body composition tools estimate body fat percentage, lean body mass, and other important health metrics. Tracking changes in your adipose tissue versus lean skeletal muscle provides a highly accurate reflection of fitness progress compared to standard scale weight alone. Our body composition estimators utilize recognized clinical models—including the US Navy Circumference regression formula and Boer mass equations—to calculate body fat ratio and lean skeletal mass. Understanding these percentages allows athletes and fitness practitioners to tailor dietary deficits, avoid muscle catabolism during dieting phases, and monitor metabolic fat-to-muscle metrics over time. Achieve a deeper, data-driven understanding of your muscular development, structural body composition, and overall physiological health markers.",
+              introduction: "Tracking changes in adipose tissue versus lean skeletal muscle provides a highly accurate reflection of fitness progress compared to standard scale weight alone. Our body composition estimators utilize recognized clinical models, including the US Navy Circumference regression formula, to help you understand your muscular development and structural fitness status.",
+              benefits: [
+                "Estimate precise body fat percentage",
+                "Calculate lean body mass ratio",
+                "Monitor skeletal mass percentages"
+              ],
+              closing: "Achieve a data-driven understanding of your muscular development and overall physiological health markers.",
               links: [
                 { label: "Body Fat Calculator", path: "/calculators/body-fat-calculator" },
                 { label: "Lean Body Mass Calculator", path: "/calculators/lean-body-mass-calculator" }
@@ -441,7 +445,13 @@ export default function Homepage({ onNavigate }: HomepageProps) {
             },
             {
               title: "Fitness Performance",
-              description: "Performance calculators help estimate calorie burn, metabolic rate, and exercise-related metrics. Your basal metabolic rate (BMR) represents the foundational caloric baseline required to sustain vital organ functions at complete rest. Integrating your BMR with specific metabolic equivalent of task (MET) values during activities like walking, jogging, or weightlifting allows us to calculate precise physical energy expenditure. Our fitness performance calculators translate active metrics into absolute caloric expenditure values, allowing for perfect energetic synchronization. Understanding your exact exercise energy cost enables you to plan recovery meals, optimize carbohydrate loading schedules, prevent athletic overtraining syndrome, and maximize aerobic and anaerobic cardiovascular conditioning with clinical precision.",
+              introduction: "Your basal metabolic rate (BMR) represents the foundational caloric baseline required to sustain vital organ functions at complete rest. Integrating your active metrics with specific metabolic equivalent of task (MET) values during activities like walking, jogging, or weightlifting allows for perfect metabolic synchronization and clinical training precision.",
+              benefits: [
+                "Determine baseline BMR expenditure",
+                "Estimate calorie burn during activities",
+                "Analyze MET cardiovascular conditioning"
+              ],
+              closing: "Sync your physical energy cost with recovery meals to maximize performance and prevent athletic overtraining.",
               links: [
                 { label: "BMR Calculator", path: "/calculators/bmr-calculator" },
                 { label: "Walking Calories Calculator", path: "/calculators/walking-calories-calculator" }
@@ -465,9 +475,18 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                     </h3>
                   </div>
                   
-                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
-                    {category.description}
-                  </p>
+                  <div className="text-xs text-black dark:text-white space-y-3 leading-relaxed">
+                    <p className="text-justify">{category.introduction}</p>
+                    <div className="py-1">
+                      <span className="font-bold text-slate-800 dark:text-slate-200 block mb-1">Key Benefits:</span>
+                      <ul className="list-disc pl-4 space-y-0.5 text-black dark:text-white">
+                        {category.benefits.map((b, i) => (
+                          <li key={i}>{b}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <p className="italic text-black dark:text-white">{category.closing}</p>
+                  </div>
                 </div>
 
                 <div className="pt-4 border-t border-slate-200/50 dark:border-gray-850">
@@ -476,14 +495,15 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {category.links.map((link, idx) => (
-                      <button
+                      <a
                         key={idx}
-                        onClick={() => onNavigate(link.path)}
+                        href={link.path}
+                        onClick={(e) => { e.preventDefault(); onNavigate(link.path); }}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-950 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 text-xs font-semibold text-slate-700 hover:text-emerald-700 dark:text-slate-300 dark:hover:text-emerald-400 border border-slate-200 dark:border-gray-800 rounded-xl transition-all cursor-pointer shadow-xs"
                       >
                         <span>{link.label}</span>
                         <ArrowRight className="h-3 w-3" />
-                      </button>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -500,7 +520,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
             <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Why Trust FitMetricsHub?
             </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm text-black dark:text-white max-w-2xl mx-auto leading-relaxed">
               Our calculators are built using widely accepted scientific formulas and industry-standard methodologies.
             </p>
           </div>
@@ -545,7 +565,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                   <h3 className="font-bold text-slate-800 dark:text-white text-sm">
                     {card.title}
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
+                  <p className="text-xs text-black dark:text-white leading-relaxed text-justify">
                     {card.description}
                   </p>
                 </div>
@@ -555,55 +575,9 @@ export default function Homepage({ onNavigate }: HomepageProps) {
         </div>
       </section>
 
-      {/* CORE DYNAMIC CALCULATORS FILTERING GRID */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8" id="calculators-grid-section">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-850 dark:text-white tracking-tight">
-              Interactive Fitness Estimators
-            </h2>
-            <p className="text-sm text-slate-500 mt-1">
-              Select a specialized category to narrow down your analysis tools.
-            </p>
-          </div>
-
-          {/* Category Tabs */}
-          <div className="flex flex-wrap gap-1 bg-slate-100 dark:bg-gray-900 p-1 border border-slate-200/50 rounded-lg w-fit">
-            {(['all', 'weight-management', 'nutrition', 'fitness-performance'] as const).map((cat) => {
-              const isActive = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer ${
-                    isActive
-                      ? 'bg-emerald-600 text-white shadow-sm'
-                      : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-                  }`}
-                  id={`home-cat-tab-${cat}`}
-                >
-                  {cat === 'all' ? 'All Tools' : cat.replace('-', ' ')}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Real Dynamic Grid displaying matched estimators */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="homepage-calculators-grid">
-          {filteredCalculators.map((calc) => (
-            <CalculatorCard
-              key={calc.slug}
-              config={calc}
-              onNavigate={onNavigate}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* 4. CLINICAL REVENUE IN-CONTENT AD SLOT */}
+      {/* AD PLACEMENT #1 */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <AdPlaceholder type="in-content" />
+        <AdPlaceholder type="top-banner" />
       </div>
 
       {/* SECTION 4: FEATURED GUIDES */}
@@ -612,57 +586,83 @@ export default function Homepage({ onNavigate }: HomepageProps) {
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Fitness & Nutrition Guides
           </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1.5 max-w-2xl">
-            Learn the science behind the numbers with our peer-reviewed metabolic literature.
+          <p className="text-sm text-black dark:text-white mt-1.5 max-w-2xl">
+            Learn the science behind the numbers and make informed health decisions.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            'what-is-bmi',
-            'how-many-calories-should-i-eat',
-            'weight-loss-fundamentals',
-            'protein-intake-guide',
-            'understanding-body-fat-percentage'
-          ].map((slug) => {
-            const guide = GUIDES.find(g => g.slug === slug);
-            if (!guide) return null;
-
-            let displayTitle = guide.title;
-            if (guide.slug === 'how-many-calories-should-i-eat') {
-              displayTitle = 'Understanding BMR & Energy';
-            } else if (guide.slug === 'weight-loss-fundamentals') {
-              displayTitle = 'Daily Calorie Needs Explained';
+            {
+              slug: 'what-is-bmi',
+              title: 'What Is BMI?',
+              category: 'Weight Management',
+              excerpt: 'Understand BMI, how it is calculated, and what your result means.',
+              readTime: '5 min read',
+              author: 'FitMetrics Medical Advisory Board'
+            },
+            {
+              slug: 'how-many-calories-should-i-eat',
+              title: 'Understanding BMR',
+              category: 'Nutrition',
+              excerpt: 'Learn how your Basal Metabolic Rate affects calorie requirements.',
+              readTime: '6 min read',
+              author: 'FitMetrics Medical Advisory Board'
+            },
+            {
+              slug: 'weight-loss-fundamentals',
+              title: 'Daily Calorie Needs Explained',
+              category: 'Weight Management',
+              excerpt: 'Find out how many calories you should consume each day.',
+              readTime: '7 min read',
+              author: 'FitMetrics Medical Advisory Board'
+            },
+            {
+              slug: 'protein-intake-guide',
+              title: 'Protein Intake Guide',
+              category: 'Nutrition',
+              excerpt: 'How much protein do you need for muscle gain or weight loss?',
+              readTime: '7 min read',
+              author: 'FitMetrics Medical Advisory Board'
+            },
+            {
+              slug: 'understanding-body-fat-percentage',
+              title: 'Understanding Body Fat Percentage',
+              category: 'Body Composition',
+              excerpt: 'Learn how body fat is measured and why it matters.',
+              readTime: '6 min read',
+              author: 'FitMetrics Medical Advisory Board'
             }
-
+          ].map((item) => {
             return (
               <div
-                key={guide.slug}
+                key={item.slug}
                 className="bg-white dark:bg-gray-950 border border-slate-200 dark:border-gray-800 rounded-2xl p-6 flex flex-col justify-between hover:border-emerald-300 dark:hover:border-emerald-950 transition-all shadow-sm"
-                id={`home-guide-card-${guide.slug}`}
+                id={`home-guide-card-${item.slug}`}
               >
                 <div className="space-y-3">
                   <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-600 block">
-                    {guide.category}
+                    {item.category}
                   </span>
                   <h3 className="text-base font-bold text-slate-800 dark:text-white line-clamp-2 leading-snug">
-                    {displayTitle}
+                    {item.title}
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed text-justify">
-                    {guide.shortDescription}
+                  <p className="text-xs text-black dark:text-white line-clamp-3 leading-relaxed text-justify">
+                    {item.excerpt}
                   </p>
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-slate-100 dark:border-gray-900 flex items-center justify-between">
-                  <span className="text-[10px] text-slate-400 font-semibold">{guide.readTime} • {guide.author}</span>
-                  <button
-                    onClick={() => onNavigate(`/guides/${guide.slug}`)}
+                  <span className="text-[10px] text-slate-400 font-semibold">{item.readTime} • {item.author}</span>
+                  <a
+                    href={`/guides/${item.slug}`}
+                    onClick={(e) => { e.preventDefault(); onNavigate(`/guides/${item.slug}`); }}
                     className="text-xs font-bold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1 cursor-pointer"
-                    id={`home-guide-card-btn-${guide.slug}`}
+                    id={`home-guide-card-btn-${item.slug}`}
                   >
                     <span>Read Guide</span>
                     <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
+                  </a>
                 </div>
               </div>
             );
@@ -727,36 +727,36 @@ export default function Homepage({ onNavigate }: HomepageProps) {
             <h2 className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white">
               Frequently Asked Questions
             </h2>
-            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
-              Find instant answers to common fitness, diet, metabolism, and calculation inquiries.
+            <p className="text-xs text-black dark:text-white mt-1">
+              Got questions? We have answers. Find out how to use our tools and get the most out of your fitness journey.
             </p>
           </div>
 
           <div className="space-y-3">
             {[
               {
-                q: "What is a BMI calculator?",
-                a: "A Body Mass Index (BMI) calculator is an internationally recognized health screening tool that estimates whether your weight is appropriate for your height. By dividing your weight in kilograms by your height in meters squared, it categorizes your body weight into standard underweight, normal, overweight, or obese ranges. While BMI does not directly measure body fat percentage or distinguish between muscle and adipose tissue, it provides a valuable initial screening indicator of potential weight-related health risks and general physical well-being."
+                q: "What formulas do your calculators use?",
+                a: "Our calculators use industry-standard, scientifically validated formulas. For example, the Calorie Calculator uses the Mifflin-St Jeor equation (known for its high accuracy), the BMR Calculator uses the Harris-Benedict equation, and the Body Fat Calculator relies on the US Navy Circumference method. This ensures that you receive the most precise and reliable estimations possible."
               },
               {
-                q: "How many calories should I eat per day?",
-                a: "The number of daily calories you should consume depends on your age, biological sex, physical weight, height, and active lifestyle. First, calculate your Basal Metabolic Rate (BMR) to find your baseline energy needs at complete rest. Then, apply an activity multiplier to determine your Total Daily Energy Expenditure (TDEE). To lose weight safely and sustainably, establish a modest caloric deficit of 300 to 500 calories below your TDEE. To gain lean muscle mass or healthy body mass, target a structured caloric surplus of 200 to 400 calories."
+                q: "Are the calculators accurate?",
+                a: "While our calculators are based on highly regarded scientific equations, they should be treated as estimations. Individual metabolic rates, body compositions, and activity levels vary. These tools provide an excellent baseline for planning, but they are not a substitute for professional medical advice or clinical assessments."
               },
               {
-                q: "How much protein do I need?",
-                a: "Daily protein intake guidelines vary based on physical activity levels and body composition goals. For general sedentary individuals, the recommended dietary allowance (RDA) is approximately 0.8 grams of protein per kilogram of body weight. However, for active athletes, weightlifters, and individuals looking to optimize muscle protein synthesis during a fat-loss phase, a higher intake ranging between 1.6 to 2.2 grams per kilogram (about 0.7 to 1.0 grams per pound) of body weight is clinically recommended to retain lean muscle tissue and support recovery."
+                q: "How often should I recalculate my metrics?",
+                a: "We recommend recalculating your metrics every 2-4 weeks or whenever you experience a significant change in your weight, activity level, or fitness goals. Your body adapts to changes in diet and exercise, so updating your parameters ensures your plans remain aligned with your current physical state."
               },
               {
-                q: "What is body fat percentage?",
-                a: "Body fat percentage represents the total mass of fat divided by your total body mass, expressed as a percentage. This metric includes both essential body fat (necessary for neurological and hormonal regulation) and storage body fat (adipose tissue). Measuring body fat ratio provides a significantly clearer picture of cardiovascular health and physical conditioning than scale weight or BMI, as it distinguishes between muscle tissue, bone density, and fat mass. Ideal ranges differ, but typically fall between 14-24% for men and 21-31% for women."
+                q: "Is my personal data safe?",
+                a: "Absolutely. FitMetricsHub does not store, share, or sell your personal or physical data. All calculations are performed instantly in your browser, and no user input is retained on our servers. Your privacy is our absolute priority."
               },
               {
-                q: "How much water should I drink daily?",
-                a: "Daily water intake requirements depend heavily on physical exercise duration, environmental temperature, climate, and body size. As a foundational baseline, clinical guidelines recommend consuming approximately 3 to 4 liters (100 to 130 ounces) of total fluids daily for men and 2.2 to 3 liters (70 to 90 ounces) for women. Proper cellular hydration supports healthy metabolic rates, optimal nutrient absorption, healthy kidney filtration, and joint lubrication, and should be scaled upward during high-intensity training."
+                q: "Can I use these calculators for weight loss?",
+                a: "Yes! Our calculators are excellent tools for managing weight loss. You can use the Calorie and Macro calculators to establish a safe calorie deficit, calculate your macronutrient distribution, and set progressive targets. Remember to consult a medical professional before starting any extreme calorie restriction or training regimen."
               },
               {
-                q: "Are FitMetricsHub calculators accurate?",
-                a: "Yes, our calculators are highly accurate and align directly with published peer-reviewed medical and dietetic formulas, such as the Mifflin-St Jeor equation, the Harris-Benedict formula, and the US Navy circumference model. However, because these mathematical models are based on statistical population averages and demographics, they do not account for individual muscle-to-fat ratios or genetic metabolic variances. They should be utilized as reliable educational baselines, not as certified medical diagnoses."
+                q: "Do you offer personalized coaching?",
+                a: "While we do not provide one-on-one personal coaching directly through the platform, we offer comprehensive, scientifically backed guides, educational resources, and standard fitness frameworks to help you self-direct your training and nutrition. We also feature trusted, high-quality sponsored services to help you reach your goals."
               }
             ].map((item, idx) => {
               const isExpanded = expandedFaq === idx;
@@ -767,8 +767,9 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                 >
                   <button
                     onClick={() => setExpandedFaq(isExpanded ? null : idx)}
-                    className="w-full flex items-center justify-between p-4 text-left font-bold text-slate-800 dark:text-white text-sm hover:bg-slate-50 dark:hover:bg-gray-900/40 transition-colors cursor-pointer"
+                    className="w-full flex items-center justify-between p-4 text-left font-bold text-slate-800 dark:text-white text-sm hover:bg-slate-50 dark:hover:bg-gray-900/40 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     aria-expanded={isExpanded}
+                    id={`faq-btn-${idx}`}
                   >
                     <span>{item.q}</span>
                     {isExpanded ? (
@@ -783,7 +784,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                       isExpanded ? 'max-h-[30rem] opacity-100 border-t border-slate-200 dark:border-gray-800 p-4' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
+                    <p className="text-xs text-black dark:text-white leading-relaxed text-justify">
                       {item.a}
                     </p>
                   </div>
@@ -839,50 +840,50 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                 "mainEntity": [
                   {
                     "@type": "Question",
-                    "name": "What is a BMI calculator?",
+                    "name": "What formulas do your calculators use?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "A Body Mass Index (BMI) calculator is an internationally recognized health screening tool that estimates whether your weight is appropriate for your height. By dividing your weight in kilograms by your height in meters squared, it categorizes your body weight into standard underweight, normal, overweight, or obese ranges."
+                      "text": "Our calculators use industry-standard, scientifically validated formulas. For example, the Calorie Calculator uses the Mifflin-St Jeor equation (known for its high accuracy), the BMR Calculator uses the Harris-Benedict equation, and the Body Fat Calculator relies on the US Navy Circumference method. This ensures that you receive the most precise and reliable estimations possible."
                     }
                   },
                   {
                     "@type": "Question",
-                    "name": "How many calories should I eat per day?",
+                    "name": "Are the calculators accurate?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "The number of daily calories you should consume depends on your age, biological sex, physical weight, height, and active lifestyle. First, calculate your Basal Metabolic Rate (BMR) to find your baseline energy needs at complete rest. Then, apply an activity multiplier to determine your Total Daily Energy Expenditure (TDEE)."
+                      "text": "While our calculators are based on highly regarded scientific equations, they should be treated as estimations. Individual metabolic rates, body compositions, and activity levels vary. These tools provide an excellent baseline for planning, but they are not a substitute for professional medical advice or clinical assessments."
                     }
                   },
                   {
                     "@type": "Question",
-                    "name": "How much protein do I need?",
+                    "name": "How often should I recalculate my metrics?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "Daily protein intake guidelines vary based on physical activity levels and body composition goals. For general sedentary individuals, the recommended dietary allowance (RDA) is approximately 0.8 grams of protein per kilogram of body weight. However, for active athletes, weightlifters, and individuals looking to optimize muscle protein synthesis during a fat-loss phase, a higher intake ranging between 1.6 to 2.2 grams per kilogram is clinically recommended."
+                      "text": "We recommend recalculating your metrics every 2-4 weeks or whenever you experience a significant change in your weight, activity level, or fitness goals. Your body adapts to changes in diet and exercise, so updating your parameters ensures your plans remain aligned with your current physical state."
                     }
                   },
                   {
                     "@type": "Question",
-                    "name": "What is body fat percentage?",
+                    "name": "Is my personal data safe?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "Body fat percentage represents the total mass of fat divided by your total body mass, expressed as a percentage. This metric includes both essential body fat (necessary for neurological and hormonal regulation) and storage body fat (adipose tissue)."
+                      "text": "Absolutely. FitMetricsHub does not store, share, or sell your personal or physical data. All calculations are performed instantly in your browser, and no user input is retained on our servers. Your privacy is our absolute priority."
                     }
                   },
                   {
                     "@type": "Question",
-                    "name": "How much water should I drink daily?",
+                    "name": "Can I use these calculators for weight loss?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "Daily water intake requirements depend heavily on physical exercise duration, environmental temperature, climate, and body size. As a foundational baseline, clinical guidelines recommend consuming approximately 3 to 4 liters of total fluids daily for men and 2.2 to 3 liters for women."
+                      "text": "Yes! Our calculators are excellent tools for managing weight loss. You can use the Calorie and Macro calculators to establish a safe calorie deficit, calculate your macronutrient distribution, and set progressive targets. Remember to consult a medical professional before starting any extreme calorie restriction or training regimen."
                     }
                   },
                   {
                     "@type": "Question",
-                    "name": "Are FitMetricsHub calculators accurate?",
+                    "name": "Do you offer personalized coaching?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "Yes, our calculators are highly accurate and align directly with published peer-reviewed medical and dietetic formulas, such as the Mifflin-St Jeor equation, the Harris-Benedict formula, and the US Navy circumference model."
+                      "text": "While we do not provide one-on-one personal coaching directly through the platform, we offer comprehensive, scientifically backed guides, educational resources, and standard fitness frameworks to help you self-direct your training and nutrition. We also feature trusted, high-quality sponsored services to help you reach your goals."
                     }
                   }
                 ]

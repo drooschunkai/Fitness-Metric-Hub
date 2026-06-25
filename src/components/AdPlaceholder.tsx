@@ -43,10 +43,10 @@ export default function AdPlaceholder({ type, className = "" }: AdPlaceholderPro
 
   return (
     <div className={`my-6 ${className}`} id={`ad-wrapper-${type}`}>
-      <div className="flex items-center justify-between px-3 py-1 bg-slate-100 dark:bg-gray-900 rounded-t-lg border-t border-x border-slate-200 dark:border-gray-800 text-[10px] font-bold tracking-wider text-slate-500 uppercase">
-        <span className="flex items-center gap-1">
-          <Sparkles className="h-3 w-3 text-emerald-500 animate-pulse" />
-          AdSense Revenue Zone • {config.label}
+      <div className="flex items-center justify-between px-3 py-1 bg-slate-50 dark:bg-gray-900 rounded-t-lg border-t border-x border-slate-200 dark:border-gray-850 text-[10px] font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">
+        <span className="flex items-center gap-1.5">
+          <Sparkles className="h-3 w-3 text-emerald-500/80 animate-pulse" />
+          <span>Sponsored</span>
         </span>
         <div className="flex items-center gap-2">
           <span className="text-slate-400 font-mono text-[9px] hidden sm:inline">{config.dims}</span>
@@ -68,7 +68,7 @@ export default function AdPlaceholder({ type, className = "" }: AdPlaceholderPro
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <span className="inline-block px-1.5 py-0.5 bg-slate-200 dark:bg-gray-800 text-slate-500 dark:text-gray-400 text-[9px] font-extrabold uppercase rounded tracking-wide">
-                  Sponsor
+                  Sponsored
                 </span>
                 <span className="text-xs font-semibold text-slate-700 dark:text-gray-300">
                   FitMetricsHub Premium Coaching

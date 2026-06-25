@@ -62,7 +62,7 @@ export default function FAQSection({ faqs, title = "Frequently Asked Questions",
                     isOpen ? 'max-h-[500px] border-t border-slate-100 dark:border-gray-800' : 'max-h-0'
                   }`}
                 >
-                  <p className="p-4 text-sm text-slate-600 dark:text-gray-400 leading-relaxed">
+                  <p className="p-4 text-sm text-black dark:text-white leading-relaxed text-justify">
                     {faq.answer}
                   </p>
                 </div>

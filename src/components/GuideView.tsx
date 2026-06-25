@@ -5,6 +5,7 @@ import FAQSection from './FAQSection';
 import CalculatorCard from './CalculatorCard';
 import { CALCULATORS } from '../data/calculators';
 import { BookOpen, User, Calendar, Clock, ChevronRight, Scale } from 'lucide-react';
+import { parseMarkdownToHtml } from '../utils/markdown';
 
 interface GuideViewProps {
   article: GuideArticle;
@@ -96,7 +97,7 @@ export default function GuideView({ article, route, onNavigate }: GuideViewProps
 
           {/* Render article contents */}
           <article className="prose prose-sm md:prose max-w-none text-gray-700 dark:text-gray-300">
-            <div dangerouslySetInnerHTML={{ __html: article.content }} />
+            <div dangerouslySetInnerHTML={{ __html: article.content.trim().startsWith('<') ? article.content : parseMarkdownToHtml(article.content) }} />
           </article>
 
           {/* Dynamic In-Article Ad Unit */}

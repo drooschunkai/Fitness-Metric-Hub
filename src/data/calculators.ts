@@ -1,4 +1,5 @@
 import { CalculatorConfig } from '../types';
+import { DYNAMIC_CALCULATORS } from './dynamic_calculators';
 
 export const CALCULATORS: CalculatorConfig[] = [
   {
@@ -380,5 +381,6 @@ export const CALCULATORS: CalculatorConfig[] = [
     ],
     relatedSlugs: ['calorie-calculator', 'water-calculator', 'lean-body-mass-calculator'],
     relatedGuideSlugs: ['weight-loss-fundamentals', 'how-many-calories-should-i-eat']
-  }
+  },
+  ...DYNAMIC_CALCULATORS
 ];

@@ -1,5 +1,6 @@
 import { GuideArticle } from '../types';
 import { CLUSTER_GUIDES } from './guides_clusters';
+import { PHASE2_GUIDES } from './phase2_guides';
 
 export const GUIDES: GuideArticle[] = [
   {
@@ -433,5 +434,6 @@ export const GUIDES: GuideArticle[] = [
     ],
     relatedCalculators: ['calorie-calculator', 'bmi-calculator', 'macro-calculator']
   },
-  ...CLUSTER_GUIDES
+  ...CLUSTER_GUIDES,
+  ...PHASE2_GUIDES
 ];

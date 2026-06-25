@@ -12,7 +12,7 @@ interface CalculatorsPageProps {
 }
 
 export default function CalculatorsPage({ onNavigate }: CalculatorsPageProps) {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'weight-management' | 'nutrition' | 'fitness-performance' | 'body-composition'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'weight-management' | 'nutrition' | 'fitness-performance' | 'body-composition' | 'hydration-health' | 'endurance-performance' | 'strength-training' | 'womens-health' | 'longevity'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   // Filter based on both category selection and search query
@@ -133,11 +133,16 @@ export default function CalculatorsPage({ onNavigate }: CalculatorsPageProps) {
           {/* Category tabs */}
           <div className="flex flex-wrap gap-1 bg-slate-200/50 dark:bg-gray-950 p-1 border border-slate-200/50 dark:border-gray-800 rounded-lg w-full md:w-auto overflow-x-auto justify-start md:justify-end">
             {[
-              { id: 'all', label: 'All Tools' },
-              { id: 'weight-management', label: 'Weight Management' },
-              { id: 'nutrition', label: 'Nutrition & Diet' },
-              { id: 'fitness-performance', label: 'Performance & BMR' },
-              { id: 'body-composition', label: 'Body Composition' }
+              { id: 'all', label: 'All' },
+              { id: 'weight-management', label: 'Weight' },
+              { id: 'nutrition', label: 'Nutrition' },
+              { id: 'fitness-performance', label: 'Performance' },
+              { id: 'body-composition', label: 'Composition' },
+              { id: 'hydration-health', label: 'Hydration' },
+              { id: 'endurance-performance', label: 'Running' },
+              { id: 'strength-training', label: 'Strength' },
+              { id: 'womens-health', label: 'Women\'s' },
+              { id: 'longevity', label: 'Longevity' }
             ].map((cat) => {
               const isActive = selectedCategory === cat.id;
               return (

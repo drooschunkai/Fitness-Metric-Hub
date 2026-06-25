@@ -140,7 +140,12 @@ export function CategoryPage({ categorySlug, onNavigate }: CategoryPageProps) {
     'weight-management': 'Weight Management',
     'nutrition': 'Nutrition & Macro Diet',
     'fitness-performance': 'Fitness & Performance',
-    'body-composition': 'Body Composition'
+    'body-composition': 'Body Composition',
+    'hydration-health': 'Hydration & Health Metrics',
+    'endurance-performance': 'Running & Endurance',
+    'strength-training': 'Strength Training',
+    'womens-health': 'Pregnancy & Women\'s Fitness',
+    'longevity': 'Aging & Longevity'
   };
 
   const categoryTitle = categoryTitleMap[cleanSlug] || 'Health Directory';

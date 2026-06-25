@@ -30,6 +30,7 @@ export default function BmiCalculator() {
     healthyWeightText: string;
     bmiPrime: number;
     ponderalIndex: number;
+    interpretation: string;
   } | null>(null);
 
   const calculateBmi = () => {
@@ -128,6 +129,41 @@ export default function BmiCalculator() {
     const bmiPrime = bmiFixed / 25;
     const ponderalIndex = wKg / Math.pow(hM, 3);
 
+    let interpretation = '';
+    if (bmiFixed < 18.5) {
+      const kgToGain = minHealthyKg - wKg;
+      let diffText = '';
+      if (activeTab === 'us') {
+        const lbsToGain = kgToGain * 2.20462;
+        diffText = `${Math.ceil(lbsToGain)} lbs`;
+      } else if (activeTab === 'other') {
+        const lbsToGain = kgToGain * 2.20462;
+        const stones = Math.floor(lbsToGain / 14);
+        const lbs = Math.ceil(lbsToGain % 14);
+        diffText = stones > 0 ? `${stones} st ${lbs} lbs` : `${lbs} lbs`;
+      } else {
+        diffText = `${kgToGain.toFixed(1)} kg`;
+      }
+      interpretation = `Your BMI of ${bmiFixed} falls within the ${category} weight range. Gain ${diffText} to reach a healthy BMI of 18.5 kg/m².`;
+    } else if (bmiFixed >= 25) {
+      const kgToLose = wKg - maxHealthyKg;
+      let diffText = '';
+      if (activeTab === 'us') {
+        const lbsToLose = kgToLose * 2.20462;
+        diffText = `${Math.ceil(lbsToLose)} lbs`;
+      } else if (activeTab === 'other') {
+        const lbsToLose = kgToLose * 2.20462;
+        const stones = Math.floor(lbsToLose / 14);
+        const lbs = Math.ceil(lbsToLose % 14);
+        diffText = stones > 0 ? `${stones} st ${lbs} lbs` : `${lbs} lbs`;
+      } else {
+        diffText = `${kgToLose.toFixed(1)} kg`;
+      }
+      interpretation = `Your BMI of ${bmiFixed} falls within the ${category} weight range. Lose ${diffText} to reach a healthy BMI of 25.0 kg/m².`;
+    } else {
+      interpretation = `Your BMI of ${bmiFixed} falls within the Normal weight range. You are currently at a healthy weight. Keep up the excellent work!`;
+    }
+
     setResult({
       bmi: bmiFixed,
       category,
@@ -136,7 +172,8 @@ export default function BmiCalculator() {
       healthyRange,
       healthyWeightText,
       bmiPrime: parseFloat(bmiPrime.toFixed(2)),
-      ponderalIndex: parseFloat(ponderalIndex.toFixed(1))
+      ponderalIndex: parseFloat(ponderalIndex.toFixed(1)),
+      interpretation
     });
   };
 
@@ -471,7 +508,7 @@ export default function BmiCalculator() {
               <div>
                 <span className="text-slate-500 dark:text-slate-400 text-xs font-bold block uppercase tracking-wider">Calculated Score</span>
                 <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-3xl font-extrabold text-slate-800 dark:text-white font-mono">
+                  <span className="text-xl font-extrabold text-slate-800 dark:text-white font-mono">
                     BMI = {result.bmi} kg/m²
                   </span>
                   <span className={`text-sm font-extrabold px-2 py-0.5 rounded-full ${result.catBg} ${result.catColor} border`}>
@@ -554,6 +591,16 @@ export default function BmiCalculator() {
                      {result.bmi}
                   </text>
                 </svg>
+              </div>
+
+              {/* Result Interpretation */}
+              <div className="p-4 bg-emerald-500/5 dark:bg-emerald-950/10 border border-emerald-500/10 dark:border-emerald-500/20 rounded-xl space-y-1.5" id="bmi-result-interpretation">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 block">
+                  Result Interpretation
+                </span>
+                <p className="text-xs text-slate-700 dark:text-gray-300 leading-relaxed font-medium">
+                  {result.interpretation}
+                </p>
               </div>
 
               {/* Advanced Diagnostic Table details */}

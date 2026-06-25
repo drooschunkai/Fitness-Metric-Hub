@@ -1,4 +1,13 @@
-export type CategoryType = 'weight-management' | 'nutrition' | 'fitness-performance' | 'body-composition';
+export type CategoryType = 
+  | 'weight-management' 
+  | 'nutrition' 
+  | 'fitness-performance' 
+  | 'body-composition'
+  | 'hydration-health'
+  | 'endurance-performance'
+  | 'strength-training'
+  | 'womens-health'
+  | 'longevity';
 
 export interface FAQItem {
   id: string;

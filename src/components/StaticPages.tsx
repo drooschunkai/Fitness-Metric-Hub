@@ -88,8 +88,26 @@ export function ContactPage() {
           Contact Us
         </h1>
         <p className="text-sm text-gray-500 mt-2">
-          Have methodology queries or advertising feedback? Get in touch with our team.
+          Have methodology queries or advertising feedback? Get in touch with our team directly or use the form below.
         </p>
+      </div>
+
+      <div className="bg-slate-50 dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">
+            <Mail className="h-6 w-6" />
+          </div>
+          <div className="text-left">
+            <h3 className="text-sm font-bold text-gray-950 dark:text-white">Direct Email Support</h3>
+            <p className="text-xs text-gray-500">For inquiries, business feedback, or support.</p>
+          </div>
+        </div>
+        <a
+          href="mailto:drooschunkai@gmail.com"
+          className="text-sm font-extrabold text-emerald-600 dark:text-emerald-400 hover:underline shrink-0"
+        >
+          drooschunkai@gmail.com
+        </a>
       </div>
 
       <section className="bg-white dark:bg-gray-950 border border-slate-200 dark:border-gray-800 rounded-2xl p-8 shadow-sm">

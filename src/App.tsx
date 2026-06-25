@@ -30,12 +30,18 @@ import {
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
-    // Support both standard route pathname and hash-based routing fallbacks cleanly
+    // Always prioritize hash routing for universal hosting compatibility
     const hash = window.location.hash;
     if (hash && hash.startsWith('#')) {
       return hash.slice(1) || '/';
     }
-    return window.location.pathname || '/';
+    // Backward compatibility: Convert clean pathname to hash route on load
+    const pathname = window.location.pathname || '/';
+    if (pathname !== '/' && pathname !== '/index.html' && pathname !== '') {
+      window.location.hash = pathname;
+      return pathname;
+    }
+    return '/';
   });
 
   const [inspectorOpen, setInspectorOpen] = useState(false);
@@ -47,7 +53,14 @@ export default function App() {
       if (hash && hash.startsWith('#')) {
         setCurrentPath(hash.slice(1) || '/');
       } else {
-        setCurrentPath(window.location.pathname || '/');
+        // Fallback for empty hash: check if we need to migrate from pathname
+        const pathname = window.location.pathname || '/';
+        if (pathname !== '/' && pathname !== '/index.html' && pathname !== '') {
+          window.location.hash = pathname;
+          setCurrentPath(pathname);
+        } else {
+          setCurrentPath('/');
+        }
       }
     };
     window.addEventListener('popstate', handleNavigation);
@@ -181,12 +194,8 @@ export default function App() {
   }, [currentPath]);
 
   const navigate = (path: string) => {
-    const isHashRouting = window.location.hash.startsWith('#') || window.location.pathname.includes('index.html');
-    if (isHashRouting) {
-      window.location.hash = path;
-    } else {
-      window.history.pushState(null, '', path);
-    }
+    // Always use hash routing to support zero-config universal page refreshes
+    window.location.hash = path;
     setCurrentPath(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

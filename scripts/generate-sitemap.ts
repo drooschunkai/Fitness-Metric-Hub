@@ -3,7 +3,7 @@ import path from 'path';
 import { CALCULATORS } from '../src/data/calculators';
 import { GUIDES } from '../src/data/guides';
 
-const BASE_URL = 'https://unscramblerhub.com';
+const BASE_URL = 'https://fitmetricshub.com';
 
 function generateSitemap() {
   console.log('Generating sitemap.xml...');

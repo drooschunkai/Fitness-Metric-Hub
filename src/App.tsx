@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation, useParams } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SEOOverview from './components/SEOOverview';
@@ -29,26 +29,18 @@ import {
   WalkingCaloriesCalculator,
 } from './components/CalculatorsSuite';
 
-export default function App() {
-  const [currentPath, setCurrentPath] = useState<string>(() => {
-    // Standard pathname routing for clean URLs
-    const pathname = window.location.pathname || '/';
-    return pathname;
-  });
-
+export function AppLayout() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
   const [inspectorOpen, setInspectorOpen] = useState(false);
 
-  // Sync back-forward history navigation
-  useEffect(() => {
-    const handleNavigation = () => {
-      const pathname = window.location.pathname || '/';
-      setCurrentPath(pathname);
-    };
-    window.addEventListener('popstate', handleNavigation);
-    return () => {
-      window.removeEventListener('popstate', handleNavigation);
-    };
-  }, []);
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   // Automated SEO & Schema Injection Engine
   useEffect(() => {
@@ -137,47 +129,188 @@ export default function App() {
       desc = `FitMetricsHub official ${sub} information and tools designed for clinical precision.`;
     }
 
-    // Set document title
-    document.title = title;
+    if (typeof document !== 'undefined') {
+      // Set document title
+      document.title = title;
 
-    // Set or create Meta Description
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement('meta');
-      metaDesc.setAttribute('name', 'description');
-      document.head.appendChild(metaDesc);
-    }
-    metaDesc.setAttribute('content', desc);
+      // Set or create Meta Description
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.setAttribute('name', 'description');
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute('content', desc);
 
-    // Set or create Canonical Link
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute('href', currentUrl);
+      // Set or create Canonical Link
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute('href', currentUrl);
 
-    // Inject JSON-LD Schema Script
-    let schemaScript = document.getElementById('dynamic-jsonld-schema');
-    if (schemaScript) {
-      schemaScript.remove();
-    }
-    if (Object.keys(jsonLd).length > 0) {
-      schemaScript = document.createElement('script');
-      schemaScript.setAttribute('id', 'dynamic-jsonld-schema');
-      schemaScript.setAttribute('type', 'application/ld+json');
-      schemaScript.innerHTML = JSON.stringify(jsonLd);
-      document.head.appendChild(schemaScript);
+      // Inject JSON-LD Schema Script
+      let schemaScript = document.getElementById('dynamic-jsonld-schema');
+      if (schemaScript) {
+        schemaScript.remove();
+      }
+      if (Object.keys(jsonLd).length > 0) {
+        schemaScript = document.createElement('script');
+        schemaScript.setAttribute('id', 'dynamic-jsonld-schema');
+        schemaScript.setAttribute('type', 'application/ld+json');
+        schemaScript.innerHTML = JSON.stringify(jsonLd);
+        document.head.appendChild(schemaScript);
+      }
     }
   }, [currentPath]);
 
-  const navigate = (path: string) => {
-    // Standard clean pathname routing
-    window.history.pushState({}, '', path);
-    setCurrentPath(path);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const routeState: RouteState = {
+    path: currentPath,
+    params: {}
   };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
+      {/* Sticky header containing logo & menu triggers */}
+      <Header currentPath={currentPath} onNavigate={handleNavigate} />
+
+      {/* Primary dynamic content route */}
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+
+      {/* Interactive Developer SEO Sandbox overlay footer */}
+      <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-150 dark:border-gray-800 py-6 px-4">
+        <div className="max-w-7xl mx-auto space-y-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">
+                Developer Sandboxed Audit Suite
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">
+                FitMetricsHub operates dynamic SEO optimization & sitemaps directly. Expand the tool below to audit JSON-LD & meta schemas.
+              </p>
+            </div>
+            <button
+              onClick={() => setInspectorOpen(!inspectorOpen)}
+              className="bg-slate-900 hover:bg-slate-800 text-slate-100 font-bold text-xs py-2 px-4 rounded-xl shadow-xs transition-all cursor-pointer"
+              id="toggle-seo-inspector-btn"
+            >
+              {inspectorOpen ? 'Collapse Schema Inspector' : 'Inspect Dynamic SEO & AdSense Metas'}
+            </button>
+          </div>
+
+          {inspectorOpen && (
+            <div className="animate-in slide-in-from-bottom-2 duration-300">
+              <SEOOverview route={routeState} />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Standard legal disclaimer and shortcuts footer */}
+      <Footer onNavigate={handleNavigate} />
+    </div>
+  );
+}
+
+// Route-specific wrapper components to feed onNavigate prop dynamically
+export function HomePageRoute() {
+  const navigate = useNavigate();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  return <Homepage onNavigate={handleNavigate} />;
+}
+
+export function AboutPageRoute() {
+  const navigate = useNavigate();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  return <AboutPage onNavigate={handleNavigate} />;
+}
+
+export function SitemapPageRoute() {
+  const navigate = useNavigate();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  return <SitemapPage onNavigate={handleNavigate} />;
+}
+
+export function CalculatorsPageRoute() {
+  const navigate = useNavigate();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  return <CalculatorsPage onNavigate={handleNavigate} />;
+}
+
+export function SearchResultsPageRoute() {
+  const navigate = useNavigate();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  return <SearchResultsPage onNavigate={handleNavigate} />;
+}
+
+export function CategoryPageRoute() {
+  const navigate = useNavigate();
+  const { categorySlug } = useParams();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  return <CategoryPage categorySlug={categorySlug || ''} onNavigate={handleNavigate} />;
+}
+
+export function TagPageRoute() {
+  const navigate = useNavigate();
+  const { tagSlug } = useParams();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  return <TagPage tagSlug={tagSlug || ''} onNavigate={handleNavigate} />;
+}
+
+export function CalculatorDetailRoute() {
+  const navigate = useNavigate();
+  const { slug } = useParams();
+  const location = useLocation();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const calcConfig = CALCULATORS.find(c => c.slug === slug);
+  if (!calcConfig) {
+    return <Homepage onNavigate={handleNavigate} />;
+  }
 
   // Map slugs to components
   const getCalculatorComponent = (slug: string) => {
@@ -196,140 +329,79 @@ export default function App() {
     }
   };
 
-  // Route router matcher
-  const renderRoute = () => {
-    if (currentPath === '/' || currentPath === '' || currentPath === '/index.html') {
-      return <Homepage onNavigate={navigate} />;
-    }
+  return (
+    <CalculatorLayout
+      config={calcConfig}
+      route={{ path: location.pathname, params: { slug: slug || '' } }}
+      onNavigate={handleNavigate}
+    >
+      {calcConfig.isDynamic ? (
+        <DynamicCalculator config={calcConfig} />
+      ) : (
+        getCalculatorComponent(slug || '')
+      )}
+    </CalculatorLayout>
+  );
+}
 
-    if (currentPath === '/about') {
-      return <AboutPage onNavigate={navigate} />;
+export function GuideDetailRoute() {
+  const navigate = useNavigate();
+  const { slug } = useParams();
+  const location = useLocation();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    if (currentPath === '/contact') {
-      return <ContactPage />;
-    }
-
-    if (currentPath === '/privacy') {
-      return <PrivacyPolicy />;
-    }
-
-    if (currentPath === '/terms') {
-      return <TermsOfService />;
-    }
-
-    if (currentPath === '/disclaimer') {
-      return <DisclaimerPage />;
-    }
-
-    if (currentPath === '/sitemap') {
-      return <SitemapPage onNavigate={navigate} />;
-    }
-
-    if (currentPath === '/calculators' || currentPath === '/calculators/') {
-      return <CalculatorsPage onNavigate={navigate} />;
-    }
-
-    if (currentPath.startsWith('/calculators/')) {
-      const slug = currentPath.split('/calculators/')[1];
-      const calcConfig = CALCULATORS.find(c => c.slug === slug);
-      if (calcConfig) {
-        return (
-          <CalculatorLayout
-            config={calcConfig}
-            route={{ path: currentPath, params: { slug } }}
-            onNavigate={navigate}
-          >
-            {calcConfig.isDynamic ? (
-              <DynamicCalculator config={calcConfig} />
-            ) : (
-              getCalculatorComponent(slug)
-            )}
-          </CalculatorLayout>
-        );
-      }
-    }
-
-    if (currentPath.startsWith('/guides/')) {
-      const slug = currentPath.split('/guides/')[1];
-      const guideConfig = GUIDES.find(g => g.slug === slug);
-      if (guideConfig) {
-        return (
-          <GuideView
-            article={guideConfig}
-            route={{ path: currentPath, params: { slug } }}
-            onNavigate={navigate}
-          />
-        );
-      }
-    }
-
-    if (currentPath.startsWith('/search')) {
-      return <SearchResultsPage onNavigate={navigate} />;
-    }
-
-    if (currentPath.startsWith('/categories/')) {
-      const categorySlug = currentPath.split('/categories/')[1];
-      return <CategoryPage categorySlug={categorySlug} onNavigate={navigate} />;
-    }
-
-    if (currentPath.startsWith('/tags/')) {
-      const tagSlug = currentPath.split('/tags/')[1];
-      return <TagPage tagSlug={tagSlug} onNavigate={navigate} />;
-    }
-
-    // 404 Fallback to Home
-    return <Homepage onNavigate={navigate} />;
   };
 
-  const routeState: RouteState = {
-    path: currentPath,
-    params: {}
-  };
+  const guideConfig = GUIDES.find(g => g.slug === slug);
+  if (!guideConfig) {
+    return <Homepage onNavigate={handleNavigate} />;
+  }
 
   return (
-    <BrowserRouter>
-      <div className="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
-        {/* Sticky header containing logo & menu triggers */}
-        <Header currentPath={currentPath} onNavigate={navigate} />
-
-        {/* Primary dynamic content route */}
-        <main className="flex-grow">
-          {renderRoute()}
-        </main>
-
-        {/* Interactive Developer SEO Sandbox overlay footer */}
-        <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-150 dark:border-gray-800 py-6 px-4">
-          <div className="max-w-7xl mx-auto space-y-4">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">
-                  Developer Sandboxed Audit Suite
-                </h3>
-                <p className="text-xs text-gray-500 mt-1">
-                  FitMetricsHub operates dynamic SEO optimization & sitemaps directly. Expand the tool below to audit JSON-LD & meta schemas.
-                </p>
-              </div>
-              <button
-                onClick={() => setInspectorOpen(!inspectorOpen)}
-                className="bg-slate-900 hover:bg-slate-800 text-slate-100 font-bold text-xs py-2 px-4 rounded-xl shadow-xs transition-all cursor-pointer"
-                id="toggle-seo-inspector-btn"
-              >
-                {inspectorOpen ? 'Collapse Schema Inspector' : 'Inspect Dynamic SEO & AdSense Metas'}
-              </button>
-            </div>
-
-            {inspectorOpen && (
-              <div className="animate-in slide-in-from-bottom-2 duration-300">
-                <SEOOverview route={routeState} />
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Standard legal disclaimer and shortcuts footer */}
-        <Footer onNavigate={navigate} />
-      </div>
-    </BrowserRouter>
+    <GuideView
+      article={guideConfig}
+      route={{ path: location.pathname, params: { slug: slug || '' } }}
+      onNavigate={handleNavigate}
+    />
   );
+}
+
+// Router specification for vite-react-ssg
+export const routes = [
+  {
+    path: '/',
+    Component: AppLayout,
+    children: [
+      { index: true, Component: HomePageRoute },
+      { path: 'about', Component: AboutPageRoute },
+      { path: 'contact', Component: ContactPage },
+      { path: 'privacy', Component: PrivacyPolicy },
+      { path: 'terms', Component: TermsOfService },
+      { path: 'disclaimer', Component: DisclaimerPage },
+      { path: 'sitemap', Component: SitemapPageRoute },
+      { path: 'calculators', Component: CalculatorsPageRoute },
+      {
+        path: 'calculators/:slug',
+        Component: CalculatorDetailRoute,
+        getStaticPaths: () => CALCULATORS.map(c => `/calculators/${c.slug}`)
+      },
+      {
+        path: 'guides/:slug',
+        Component: GuideDetailRoute,
+        getStaticPaths: () => GUIDES.map(g => `/guides/${g.slug}`)
+      },
+      { path: 'search', Component: SearchResultsPageRoute },
+      { path: 'categories/:categorySlug', Component: CategoryPageRoute },
+      { path: 'tags/:tagSlug', Component: TagPageRoute },
+      { path: '*', Component: HomePageRoute }
+    ]
+  }
+];
+
+// Compatibility default export
+export default function App() {
+  return null;
 }

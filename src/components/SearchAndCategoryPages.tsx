@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { CALCULATORS } from '../data/calculators';
 import { GUIDES } from '../data/guides';
 import CalculatorCard from './CalculatorCard';
@@ -9,8 +10,8 @@ interface SearchResultsPageProps {
 }
 
 export function SearchResultsPage({ onNavigate }: SearchResultsPageProps) {
-  const params = new URLSearchParams(window.location.search);
-  const query = params.get('q') || '';
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('q') || '';
   const cleanQuery = query.trim().toLowerCase();
 
   const matchingCalculators = CALCULATORS.filter(

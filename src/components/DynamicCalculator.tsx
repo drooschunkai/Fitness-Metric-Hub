@@ -9,18 +9,13 @@ interface DynamicCalculatorProps {
 
 export default function DynamicCalculator({ config }: DynamicCalculatorProps) {
   const [unit, setUnit] = useState<'metric' | 'imperial'>('metric');
-  const [inputState, setInputState] = useState<Record<string, any>>({});
-  const [results, setResults] = useState<Record<string, any>>({});
 
-  // Initialize input state when config or unit changes
-  useEffect(() => {
-    if (!config.inputs) return;
-    
+  // Compute initial inputState synchronously!
+  const getInitialInputState = () => {
+    if (!config.inputs) return {};
     const initial: Record<string, any> = {};
     config.inputs.forEach((input) => {
       let val = input.defaultValue;
-      
-      // Convert standard metric default values to imperial on initial load if needed
       if (unit === 'imperial' && input.unitType) {
         if (input.unitType === 'weight') {
           val = Math.round(val * 2.20462);
@@ -28,23 +23,28 @@ export default function DynamicCalculator({ config }: DynamicCalculatorProps) {
           val = Math.round(val * 0.393701);
         }
       }
-      
       initial[input.name] = val;
     });
-    
-    setInputState(initial);
+    return initial;
+  };
+
+  const [inputState, setInputState] = useState<Record<string, any>>(() => getInitialInputState());
+
+  // Reset inputState when config or unit changes (subsequent updates)
+  useEffect(() => {
+    setInputState(getInitialInputState());
   }, [config.slug, unit]);
 
-  // Recalculate whenever inputs, config, or unit changes
-  useEffect(() => {
-    if (!config.calculate || Object.keys(inputState).length === 0) return;
+  // Derive results synchronously on every render (SSR & client-safe)
+  const results = (() => {
+    if (!config.calculate || Object.keys(inputState).length === 0) return {};
     try {
-      const calculated = config.calculate(inputState, unit);
-      setResults(calculated);
+      return config.calculate(inputState, unit);
     } catch (e) {
       console.error('Error executing dynamic calculation:', e);
+      return {};
     }
-  }, [inputState, config.slug, unit]);
+  })();
 
   if (!config.inputs || !config.calculate) {
     return (

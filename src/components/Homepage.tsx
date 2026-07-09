@@ -497,7 +497,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                     {category.links.map((link, idx) => (
                       <a
                         key={idx}
-                        href={`#${link.path}`}
+                        href={link.path}
                         onClick={(e) => { e.preventDefault(); onNavigate(link.path); }}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-950 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 text-xs font-semibold text-slate-700 hover:text-emerald-700 dark:text-slate-300 dark:hover:text-emerald-400 border border-slate-200 dark:border-gray-800 rounded-xl transition-all cursor-pointer shadow-xs"
                       >
@@ -655,7 +655,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                 <div className="mt-6 pt-4 border-t border-slate-100 dark:border-gray-900 flex items-center justify-between">
                   <span className="text-[10px] text-slate-400 font-semibold">{item.readTime} • {item.author}</span>
                   <a
-                    href={`#/guides/${item.slug}`}
+                    href={`/guides/${item.slug}`}
                     onClick={(e) => { e.preventDefault(); onNavigate(`/guides/${item.slug}`); }}
                     className="text-xs font-bold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1 cursor-pointer"
                     id={`home-guide-card-btn-${item.slug}`}

@@ -94,7 +94,7 @@ export default function SitemapPage({ onNavigate }: SitemapPageProps) {
               filteredMainPages.map((page, idx) => (
                 <li key={idx} className="group">
                   <a
-                    href={`#${page.path}`}
+                    href={page.path}
                     onClick={(e) => handleLinkClick(e, page.path)}
                     className="flex flex-col p-3 rounded-xl bg-slate-50 hover:bg-emerald-50/40 border border-slate-100 dark:bg-gray-900/40 dark:border-gray-850 dark:hover:bg-emerald-950/10 transition-all focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   >
@@ -126,7 +126,7 @@ export default function SitemapPage({ onNavigate }: SitemapPageProps) {
               filteredCalculators.map((calc, idx) => (
                 <li key={idx} className="group">
                   <a
-                    href={`#${calc.path}`}
+                    href={calc.path}
                     onClick={(e) => handleLinkClick(e, calc.path)}
                     className="flex flex-col p-3 rounded-xl bg-slate-50 hover:bg-emerald-50/40 border border-slate-100 dark:bg-gray-900/40 dark:border-gray-850 dark:hover:bg-emerald-950/10 transition-all focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   >
@@ -158,7 +158,7 @@ export default function SitemapPage({ onNavigate }: SitemapPageProps) {
               filteredGuides.map((guide, idx) => (
                 <li key={idx} className="group">
                   <a
-                    href={`#${guide.path}`}
+                    href={guide.path}
                     onClick={(e) => handleLinkClick(e, guide.path)}
                     className="flex flex-col p-3 rounded-xl bg-slate-50 hover:bg-emerald-50/40 border border-slate-100 dark:bg-gray-900/40 dark:border-gray-850 dark:hover:bg-emerald-950/10 transition-all focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   >

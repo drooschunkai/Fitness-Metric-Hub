@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SEOOverview from './components/SEOOverview';
@@ -30,44 +31,22 @@ import {
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
-    // Always prioritize hash routing for universal hosting compatibility
-    const hash = window.location.hash;
-    if (hash && hash.startsWith('#')) {
-      return hash.slice(1) || '/';
-    }
-    // Backward compatibility: Convert clean pathname to hash route on load
+    // Standard pathname routing for clean URLs
     const pathname = window.location.pathname || '/';
-    if (pathname !== '/' && pathname !== '/index.html' && pathname !== '') {
-      window.location.hash = pathname;
-      return pathname;
-    }
-    return '/';
+    return pathname;
   });
 
   const [inspectorOpen, setInspectorOpen] = useState(false);
 
-  // Sync back-forward history navigation and hash changes
+  // Sync back-forward history navigation
   useEffect(() => {
     const handleNavigation = () => {
-      const hash = window.location.hash;
-      if (hash && hash.startsWith('#')) {
-        setCurrentPath(hash.slice(1) || '/');
-      } else {
-        // Fallback for empty hash: check if we need to migrate from pathname
-        const pathname = window.location.pathname || '/';
-        if (pathname !== '/' && pathname !== '/index.html' && pathname !== '') {
-          window.location.hash = pathname;
-          setCurrentPath(pathname);
-        } else {
-          setCurrentPath('/');
-        }
-      }
+      const pathname = window.location.pathname || '/';
+      setCurrentPath(pathname);
     };
     window.addEventListener('popstate', handleNavigation);
-    window.addEventListener('hashchange', handleNavigation);
     return () => {
       window.removeEventListener('popstate', handleNavigation);
-      window.removeEventListener('hashchange', handleNavigation);
     };
   }, []);
 
@@ -194,8 +173,8 @@ export default function App() {
   }, [currentPath]);
 
   const navigate = (path: string) => {
-    // Always use hash routing to support zero-config universal page refreshes
-    window.location.hash = path;
+    // Standard clean pathname routing
+    window.history.pushState({}, '', path);
     setCurrentPath(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -309,46 +288,48 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
-      {/* Sticky header containing logo & menu triggers */}
-      <Header currentPath={currentPath} onNavigate={navigate} />
+    <BrowserRouter>
+      <div className="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
+        {/* Sticky header containing logo & menu triggers */}
+        <Header currentPath={currentPath} onNavigate={navigate} />
 
-      {/* Primary dynamic content route */}
-      <main className="flex-grow">
-        {renderRoute()}
-      </main>
+        {/* Primary dynamic content route */}
+        <main className="flex-grow">
+          {renderRoute()}
+        </main>
 
-      {/* Interactive Developer SEO Sandbox overlay footer */}
-      <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-150 dark:border-gray-800 py-6 px-4">
-        <div className="max-w-7xl mx-auto space-y-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">
-                Developer Sandboxed Audit Suite
-              </h3>
-              <p className="text-xs text-gray-500 mt-1">
-                FitMetricsHub operates dynamic SEO optimization & sitemaps directly. Expand the tool below to audit JSON-LD & meta schemas.
-              </p>
+        {/* Interactive Developer SEO Sandbox overlay footer */}
+        <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-150 dark:border-gray-800 py-6 px-4">
+          <div className="max-w-7xl mx-auto space-y-4">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">
+                  Developer Sandboxed Audit Suite
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">
+                  FitMetricsHub operates dynamic SEO optimization & sitemaps directly. Expand the tool below to audit JSON-LD & meta schemas.
+                </p>
+              </div>
+              <button
+                onClick={() => setInspectorOpen(!inspectorOpen)}
+                className="bg-slate-900 hover:bg-slate-800 text-slate-100 font-bold text-xs py-2 px-4 rounded-xl shadow-xs transition-all cursor-pointer"
+                id="toggle-seo-inspector-btn"
+              >
+                {inspectorOpen ? 'Collapse Schema Inspector' : 'Inspect Dynamic SEO & AdSense Metas'}
+              </button>
             </div>
-            <button
-              onClick={() => setInspectorOpen(!inspectorOpen)}
-              className="bg-slate-900 hover:bg-slate-800 text-slate-100 font-bold text-xs py-2 px-4 rounded-xl shadow-xs transition-all cursor-pointer"
-              id="toggle-seo-inspector-btn"
-            >
-              {inspectorOpen ? 'Collapse Schema Inspector' : 'Inspect Dynamic SEO & AdSense Metas'}
-            </button>
+
+            {inspectorOpen && (
+              <div className="animate-in slide-in-from-bottom-2 duration-300">
+                <SEOOverview route={routeState} />
+              </div>
+            )}
           </div>
-
-          {inspectorOpen && (
-            <div className="animate-in slide-in-from-bottom-2 duration-300">
-              <SEOOverview route={routeState} />
-            </div>
-          )}
         </div>
-      </div>
 
-      {/* Standard legal disclaimer and shortcuts footer */}
-      <Footer onNavigate={navigate} />
-    </div>
+        {/* Standard legal disclaimer and shortcuts footer */}
+        <Footer onNavigate={navigate} />
+      </div>
+    </BrowserRouter>
   );
 }

@@ -12,7 +12,7 @@ export const CLUSTER_GUIDES: GuideArticle[] = [
     category: 'Weight Management',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'introduction', text: '1. What Are BMI Categories?' },
       { id: 'underweight', text: '2. Underweight Category (BMI < 18.5)' },
@@ -57,7 +57,7 @@ A BMI of 30 or higher signals significant excess body mass, often accompanied by
     category: 'Weight Management',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'athlete-bias', text: '1. The Athlete Muscle Bias' },
       { id: 'skinny-fat', text: '2. The Skinny-Fat Paradox' },
@@ -86,7 +86,7 @@ BMI does not measure where fat is stored. Visceral fat surrounding vital abdomin
     category: 'Weight Management',
     readTime: '4 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'male-ranges', text: '1. Standard Male BMI Ranges' },
       { id: 'cardio-risk', text: '2. Visceral Adipose and Cardiovascular Risk' }
@@ -111,7 +111,7 @@ Men tend to deposit adipose tissue primarily in the abdominal cavity as visceral
     category: 'Weight Management',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'essential-fat', text: '1. Female Essential Body Fat' },
       { id: 'life-stages', text: '2. Pregnancy, Menopause, and Weight Ranges' }
@@ -140,7 +140,7 @@ Pregnancy renders standard BMI formulas obsolete. After menopause, hormonal shif
     category: 'Weight Management',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'definition', text: '1. Basal Metabolic Rate Definition' },
       { id: 'influencing-factors', text: '2. What Dictates Your BMR?' }
@@ -167,7 +167,7 @@ Your Basal Metabolic Rate (BMR) represents the absolute minimum energy your vita
     category: 'Weight Management',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'tdee-pillars', text: '1. The Four Pillars of TDEE' },
       { id: 'activity-multipliers', text: '2. Understanding Activity Multipliers' }
@@ -196,7 +196,7 @@ Your physical activity level is mapped as a multiplier against your BMR to estab
     category: 'Weight Management',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'assess', text: '1. Assess Your TDEE' },
       { id: 'deficit', text: '2. Setting a Caloric Deficit for Fat Loss' },
@@ -225,7 +225,7 @@ To foster muscle synthesis while minimizing fat storage, introduce a mild surplu
     category: 'Weight Management',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'lipolysis', text: '1. Lipolysis: How Fat Is Burned' },
       { id: 'metabolic-adaptation', text: '2. Combating Metabolic Slowdown' }
@@ -250,7 +250,7 @@ Extremely severe calorie deficits trigger protective mechanisms: thyroid down-re
     category: 'Weight Management',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'anabolism', text: '1. Anabolism and Hypertrophy' },
       { id: 'dirty-vs-clean', text: '2. Dirty Bulking vs. Clean Bulking' }
@@ -280,7 +280,7 @@ Building muscle (hypertrophy) is an energy-demanding process. A caloric surplus 
     category: 'Nutrition',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'rda-standards', text: '1. Standard RDA vs. Optimal Fitness Intake' },
       { id: 'calculation', text: '2. Calculation Frameworks' }
@@ -307,7 +307,7 @@ The Recommended Dietary Allowance (RDA) of 0.8g per kilogram is the baseline req
     category: 'Nutrition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'mps', text: '1. Muscle Protein Synthesis & mTOR Pathway' },
       { id: 'leucine-trigger', text: '2. The Leucine Trigger Hypothesis' }
@@ -332,7 +332,7 @@ Leucine is the key essential amino acid that acts as a chemical switch for MPS. 
     category: 'Nutrition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'satiety', text: '1. Satiety and Hunger Hormones' },
       { id: 'tef', text: '2. The Thermic Effect of Protein' }
@@ -357,7 +357,7 @@ Digesting protein is highly energy-intensive. While fat and carbs consume only 5
     category: 'Nutrition',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'bioavailability', text: '1. Protein Bioavailability & DIAAS Scores' },
       { id: 'animal-vs-plant', text: '2. Animal vs. Plant Protein Synthesis' }
@@ -382,7 +382,7 @@ Most plant proteins lack one or more essential amino acids (limiting amino acids
     category: 'Nutrition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'bolus', text: '1. The 30g Bolus Rule Myth' },
       { id: 'overnight', text: '2. Nighttime Casein and Muscle Recovery' }
@@ -411,7 +411,7 @@ Consuming a slow-digesting protein like micellar casein (found in cottage cheese
     category: 'Body Composition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'essential-vs-storage', text: '1. Essential Fat vs. Storage Fat' },
       { id: 'visceral-fat', text: '2. Visceral vs. Subcutaneous Fat' }
@@ -439,7 +439,7 @@ Your body fat percentage is divided into:
     category: 'Body Composition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'standards', text: '1. General ACE Body Fat Guidelines' },
       { id: 'age-factors', text: '2. Why Body Fat Rises Safely with Age' }
@@ -469,7 +469,7 @@ As we age, intramuscular fat storage capacity decreases and bone density decline
     category: 'Body Composition',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'comparison', text: '1. Clinical Comparison Matrix' },
       { id: 'superiority', text: '2. Why Body Fat is Superior for Individual Assessment' }
@@ -494,7 +494,7 @@ A body fat scan reveals true metabolic health. You can easily track changes in s
     category: 'Body Composition',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'diet', text: '1. The Fat Loss Caloric Target' },
       { id: 'strength', text: '2. Resistance Training to Shield Muscle' }
@@ -519,7 +519,7 @@ Cardio burns calories, but resistance training is what signals your body to reta
     category: 'Body Composition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'definition', text: '1. What is Lean Body Mass?' },
       { id: 'metabolic-role', text: '2. The Metabolic Significance of LBM' }

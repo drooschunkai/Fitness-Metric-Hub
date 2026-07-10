@@ -11,7 +11,7 @@ const ALL_GUIDES_RAW: GuideArticle[] = [
     category: 'Weight Management',
     readTime: '5 min read',
     publishedDate: '2026-05-12',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'introduction', text: '1. What is Body Mass Index?' },
       { id: 'how-calculated', text: '2. How is BMI Calculated?' },
@@ -129,7 +129,7 @@ const ALL_GUIDES_RAW: GuideArticle[] = [
     category: 'Nutrition',
     readTime: '6 min read',
     publishedDate: '2026-05-20',
-    author: 'Michael Roberts, CSCS',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'calorie-basics', text: '1. What Is a Calorie?' },
       { id: 'tdee-structure', text: '2. The TDEE Equation' },
@@ -204,7 +204,7 @@ const ALL_GUIDES_RAW: GuideArticle[] = [
     category: 'Nutrition',
     readTime: '5 min read',
     publishedDate: '2026-05-28',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'importance', text: '1. Why is Protein Vital?' },
       { id: 'requirements', text: '2. Protein Requirements Explained' },
@@ -287,7 +287,7 @@ const ALL_GUIDES_RAW: GuideArticle[] = [
     category: 'Fitness Performance',
     readTime: '6 min read',
     publishedDate: '2026-06-05',
-    author: 'Michael Roberts, CSCS',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'what-is-bf', text: '1. What is Body Fat Percentage?' },
       { id: 'ranges', text: '2. Healthy Body Fat Ranges' },
@@ -375,7 +375,7 @@ const ALL_GUIDES_RAW: GuideArticle[] = [
     category: 'Weight Management',
     readTime: '6 min read',
     publishedDate: '2026-06-18',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'energy-balance', text: '1. The Law of Energy Balance' },
       { id: 'fat-vs-weight', text: '2. Fat Loss vs. Weight Loss' },

@@ -31,10 +31,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
             FitMetricsHub is committed to improving global health literacy by providing peer-reviewed, medically validated, and highly accurate metabolic calculations and comprehensive educational fitness tools.
           </p>
-          <div className="flex items-center gap-1.5 text-xs text-amber-700 dark:text-amber-500 font-bold">
-            <ShieldCheck className="h-4 w-4 shrink-0 text-amber-600" />
-            <span>AdSense & Privacy Ready</span>
-          </div>
+
         </div>
 
         {/* Column 2: Calculators */}

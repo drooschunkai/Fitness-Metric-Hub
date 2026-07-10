@@ -78,8 +78,8 @@ export default function SEOOverview({ route }: SEOOverviewProps) {
         'url': currentUrl,
         'datePublished': guide.publishedDate,
         'author': {
-          '@type': 'Person',
-          'name': guide.author
+          '@type': 'Organization',
+          'name': 'FitMetricsHub'
         },
         'publisher': {
           '@type': 'Organization',

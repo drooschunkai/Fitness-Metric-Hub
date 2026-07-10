@@ -12,7 +12,7 @@ export const PHASE2_GUIDES: GuideArticle[] = [
     category: 'Weight Management',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'definition', text: '1. Defining TDEE' },
       { id: 'components', text: '2. Four Pillars of Metabolism' },
@@ -45,7 +45,7 @@ TDEE is calculated by multiplying your BMR by an activity factor corresponding t
     category: 'Weight Management',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'thermodynamics', text: '1. Thermodynamics and Human Biology' },
       { id: 'creating-deficit', text: '2. Creating Your Deficit' }
@@ -70,7 +70,7 @@ A healthy calorie deficit generally ranges from 300 to 500 calories below your c
     category: 'Weight Management',
     readTime: '4 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'guidelines', text: '1. Clinical Guidelines' },
       { id: 'risks', text: '2. Risks of Rapid Loss' }
@@ -98,7 +98,7 @@ Losing weight too quickly (above 1.5% body weight weekly) triggers a protective 
     category: 'Weight Management',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'what-is-maint', text: '1. The Concept of Energy Equilibrium' },
       { id: 'reverse-dieting', text: '2. Transitioning Back to Maintenance' }
@@ -123,7 +123,7 @@ After a diet phase, slowly increase calories back to your new, updated maintenan
     category: 'Weight Management',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'reasons', text: '1. Why Plateaus Happen' },
       { id: 'strategies', text: '2. Science-Based Action Steps' }
@@ -158,7 +158,7 @@ To break a plateau:
     category: 'Body Composition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'bmi-overview', text: '1. BMI as a Screening Tool' },
       { id: 'bf-overview', text: '2. The Role of Body Fat Percentage' }
@@ -183,7 +183,7 @@ Body Fat Percentage measures the exact portion of your total weight made up of f
     category: 'Body Composition',
     readTime: '4 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'def', text: '1. What is FFMI?' },
       { id: 'standards', text: '2. Standard FFMI Benchmarks' }
@@ -211,7 +211,7 @@ The Fat-Free Mass Index (FFMI) is a metabolic metric that evaluates your muscula
     category: 'Body Composition',
     readTime: '4 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'ratio-science', text: '1. The Science of WHtR' },
       { id: 'how-measure', text: '2. How to Measure Correctly' }
@@ -239,7 +239,7 @@ To find your WHtR:
     category: 'Body Composition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'composition', text: '1. What is Lean Body Mass?' },
       { id: 'metabolic-role', text: '2. LBM and Your Metabolism' }
@@ -264,7 +264,7 @@ Your LBM is the primary driver of your resting metabolic rate (BMR). To protect 
     category: 'Body Composition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'metabolic-age', text: '1. Defining Metabolic Age' },
       { id: 'how-to-lower', text: '2. Steps to Lower Metabolic Age' }
@@ -296,7 +296,7 @@ If your metabolic age is higher than your chronological age, you can lower it by
     category: 'Nutrition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'protein-science', text: '1. The Importance of Protein' },
       { id: 'goal-ratios', text: '2. Target Ratios by Goal' }
@@ -324,7 +324,7 @@ Adjust your daily protein intake based on your primary focus:
     category: 'Nutrition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'glycogen', text: '1. Carbohydrates as Premium Muscle Fuel' },
       { id: 'carb-targets', text: '2. Daily Intake Ratios' }
@@ -351,7 +351,7 @@ Carbohydrates are stored in your muscles and liver as glycogen. This is your bod
     category: 'Nutrition',
     readTime: '4 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'types', text: '1. Soluble vs. Insoluble Fiber' },
       { id: 'benefits', text: '2. Cardiovascular and Digestive Benefits' }
@@ -377,7 +377,7 @@ Aim for **25 to 38 grams** of total dietary fiber per day to support metabolic h
     category: 'Nutrition',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'sugar-impact', text: '1. Added Sugar and Your Metabolism' },
       { id: 'limits', text: '2. Recommended Daily Limits' }
@@ -404,7 +404,7 @@ The American Heart Association (AHA) recommends keeping added sugars under:
     category: 'Nutrition',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'macros', text: '1. The Three Primary Macronutrients' },
       { id: 'balancing', text: '2. Balancing Macros for Your Goals' }
@@ -438,7 +438,7 @@ A balanced dietary structure generally falls within these ranges:
     category: 'Performance',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'zones', text: '1. The Five Training Zones' },
       { id: 'application', text: '2. Designing Your Training Week' }
@@ -467,7 +467,7 @@ To build balanced endurance, follow the **80/20 rule**: spend 80% of your weekly
     category: 'Performance',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'physiology', text: '1. The Physiology of VO2 Max' },
       { id: 'improving', text: '2. Science-Based Training Protocols' }
@@ -494,7 +494,7 @@ To improve your VO2 Max, combine:
     category: 'Performance',
     readTime: '6 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'mileage', text: '1. Structuring Your Mileage' },
       { id: 'nutrition', text: '2. Fueling and Hydration Science' }
@@ -522,7 +522,7 @@ During long training runs, practice your fueling strategy: consume **30 to 60 gr
     category: 'Performance',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'mechanics', text: '1. Biomechanics and Posture' },
       { id: 'strength', text: '2. Strength Training for Runners' }
@@ -550,7 +550,7 @@ Incorporate 2 sessions of heavy resistance training per week (focusing on squats
     category: 'Performance',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'max-hr', text: '1. Finding Your Max Heart Rate' },
       { id: 'using-zones', text: '2. Applying Zones to Your Workouts' }
@@ -584,7 +584,7 @@ Structure your weekly training using target heart rate zones:
     category: 'Strength Training',
     readTime: '4 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: '1rm-formulas', text: '1. The Brzycki and Epley Formulas' },
       { id: 'practical-use', text: '2. Practical Application in Training' }
@@ -611,7 +611,7 @@ Predicting your 1RM allows you to program working sets using specific percentage
     category: 'Strength Training',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'what-is-vol', text: '1. Defining Training Volume' },
       { id: 'programming', text: '2. Programming for Hypertrophy' }
@@ -638,7 +638,7 @@ To support muscle growth, aim for **10 to 20 working sets** per muscle group per
     category: 'Strength Training',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'overload-principle', text: '1. The Principle of Overload' },
       { id: 'methods', text: '2. Practical Methods of Progression' }
@@ -667,7 +667,7 @@ You can apply progressive overload in several ways:
     category: 'Strength Training',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'the-standards', text: '1. Standard Weight Multipliers' },
       { id: 'improving', text: '2. Tips to Improve Relative Strength' }
@@ -698,7 +698,7 @@ Focus on building raw strength while keeping your body composition lean:
     category: 'Strength Training',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'wilks-vs-dots', text: '1. Comparing Wilks and DOTS' },
       { id: 'formula-science', text: '2. The Mathematics of Relative Lift' }
@@ -727,7 +727,7 @@ Both systems apply a polynomial multiplier to your total lifted weight based on 
     category: 'Hydration',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'dehydration-impact', text: '1. How Dehydration Affects Performance' },
       { id: 'protocol', text: '2. Designing a Hydration Strategy' }
@@ -758,7 +758,7 @@ For optimal performance:
     category: 'Hydration',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'the-minerals', text: '1. The Roles of Key Electrolytes' },
       { id: 'replenishing', text: '2. Rehydration Guidelines' }
@@ -785,7 +785,7 @@ Replenishing these key electrolytes alongside fluids helps prevent cramping, sup
     category: 'Hydration',
     readTime: '5 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Sarah Jenkins, RD',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'sodium-loss', text: '1. The Impact of Sodium Depletion' },
       { id: 'replacement', text: '2. Target Replenishment Guidelines' }
@@ -812,7 +812,7 @@ For workouts lasting over 2 hours:
     category: 'Hydration',
     readTime: '4 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'the-test', text: '1. Step-by-Step Sweat Test' },
       { id: 'calculations', text: '2. Applying Your Results' }
@@ -841,7 +841,7 @@ Use your test results to build a personalized hydration plan, aiming to replace 
     category: 'Hydration',
     readTime: '4 min read',
     publishedDate: '2026-06-25',
-    author: 'Dr. Michael Vance, FACC',
+    author: 'FitMetricsHub Editorial Team',
     toc: [
       { id: 'indicators', text: '1. Early Indicators of Dehydration' },
       { id: 'tips', text: '2. Simple Daily Hydration Habits' }

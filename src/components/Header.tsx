@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Activity, Menu, X, HelpCircle, Phone, Info, ShieldCheck, FileText } from 'lucide-react';
+import { Activity, Menu, X, HelpCircle, Phone, Info, ShieldCheck, FileText, BookOpen } from 'lucide-react';
 import SearchBar from './SearchBar';
 
 interface HeaderProps {
@@ -13,6 +13,7 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
   const links = [
     { label: 'Home', path: '/' },
     { label: 'Calculators', path: '/calculators', icon: Activity },
+    { label: 'Guides', path: '/guides', icon: BookOpen },
     { label: 'About', path: '/about', icon: Info },
     { label: 'Contact', path: '/contact', icon: Phone }
   ];

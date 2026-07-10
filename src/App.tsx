@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import SEOOverview from './components/SEOOverview';
 import Homepage from './components/Homepage';
 import CalculatorsPage from './components/CalculatorsPage';
+import GuidesPage from './components/GuidesPage';
 import CalculatorLayout from './components/CalculatorLayout';
 import GuideView from './components/GuideView';
 import SitemapPage from './components/SitemapPage';
@@ -263,6 +264,17 @@ export function CalculatorsPageRoute() {
   return <CalculatorsPage onNavigate={handleNavigate} />;
 }
 
+export function GuidesPageRoute() {
+  const navigate = useNavigate();
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  return <GuidesPage onNavigate={handleNavigate} />;
+}
+
 export function SearchResultsPageRoute() {
   const navigate = useNavigate();
   const handleNavigate = (path: string) => {
@@ -397,6 +409,7 @@ export const routes = [
       { path: 'disclaimer', Component: DisclaimerPage },
       { path: 'sitemap', Component: SitemapPageRoute },
       { path: 'calculators', Component: CalculatorsPageRoute },
+      { path: 'guides', Component: GuidesPageRoute },
       // Programmatic concrete paths for static pre-rendering
       ...CALCULATORS.map(c => ({
         path: `calculators/${c.slug}`,

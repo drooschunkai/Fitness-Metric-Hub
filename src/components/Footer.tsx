@@ -125,7 +125,9 @@ export default function Footer({ onNavigate }: FooterProps) {
         {/* Column 4: Guides */}
         <div>
           <h3 className="text-xs font-extrabold text-slate-900 dark:text-white uppercase tracking-wider mb-4">
-            Guides
+            <Link to="/guides" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              Guides
+            </Link>
           </h3>
           <ul className="space-y-2.5 text-xs">
             <li>

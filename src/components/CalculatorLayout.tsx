@@ -22,8 +22,59 @@ export default function CalculatorLayout({ config, route, onNavigate, children }
     { label: config.title }
   ];
 
-  // Resolve guides linked to this calculator
-  const linkedGuides = GUIDES.filter(g => config.relatedGuideSlugs.includes(g.slug));
+  // Programmatically resolve the most relevant guides for this calculator (up to 4)
+  const getProgrammaticGuides = (): typeof GUIDES => {
+    const baseWord = config.slug.replace('-calculator', '');
+    
+    const scoredGuides = GUIDES.map(g => {
+      let score = 0;
+      
+      // 1. Explicitly requested in calculator config
+      if (config.relatedGuideSlugs && config.relatedGuideSlugs.includes(g.slug)) {
+        score += 100;
+      }
+      
+      // 2. Guide explicitly references this calculator
+      if (g.relatedCalculators && g.relatedCalculators.includes(config.slug)) {
+        score += 50;
+      }
+      
+      // 3. Slug similarity matching (e.g. guide slug contains "bmi")
+      if (g.slug.includes(baseWord)) {
+        score += 40;
+        if (g.slug.startsWith(baseWord)) {
+          score += 10;
+        }
+      }
+      
+      // 4. Category grouping fallback
+      const calcCat = config.category.toLowerCase().replace('-', ' ').trim();
+      const guideCat = g.category.toLowerCase().trim();
+      if (calcCat === 'weight management' && guideCat === 'weight management') {
+        score += 10;
+      } else if (calcCat === 'nutrition' && guideCat === 'nutrition') {
+        score += 10;
+      } else if (calcCat === 'body composition' && guideCat === 'body composition') {
+        score += 10;
+      } else if (
+        (calcCat === 'fitness performance' || calcCat === 'endurance performance' || calcCat === 'strength training' || calcCat === 'hydration health') &&
+        (guideCat === 'fitness performance' || guideCat === 'performance' || guideCat === 'strength training' || guideCat === 'hydration')
+      ) {
+        score += 10;
+      }
+      
+      return { guide: g, score };
+    });
+    
+    const sorted = scoredGuides
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(item => item.guide);
+      
+    return sorted.slice(0, 4);
+  };
+
+  const linkedGuides = getProgrammaticGuides();
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8" id={`calculator-layout-${config.slug}`}>
@@ -98,6 +149,49 @@ export default function CalculatorLayout({ config, route, onNavigate, children }
           {/* Related Calculators section */}
           {config.relatedSlugs && config.relatedSlugs.length > 0 && (
             <RelatedCalculators slugs={config.relatedSlugs} onNavigate={onNavigate} />
+          )}
+
+          {/* Related Guides section mirroring GuideView tool recommendations */}
+          {linkedGuides && linkedGuides.length > 0 && (
+            <div className="pt-6 border-t border-slate-200 dark:border-gray-800/80 mt-6" id="calculator-related-guides">
+              <h2 className="text-lg font-bold text-slate-850 dark:text-white mb-4 flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-emerald-500" />
+                Related Guides & Science
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {linkedGuides.map((guide) => (
+                  <div
+                    key={guide.slug}
+                    className="bg-white dark:bg-gray-950 border border-slate-200 dark:border-gray-800 rounded-2xl p-5 flex flex-col justify-between hover:border-emerald-300 dark:hover:border-emerald-950 transition-all shadow-sm"
+                    id={`related-guide-card-${guide.slug}`}
+                  >
+                    <div className="space-y-2">
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-600 block">
+                        {guide.category}
+                      </span>
+                      <h3 className="text-sm font-bold text-slate-800 dark:text-white line-clamp-2 leading-snug">
+                        {guide.title}
+                      </h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed text-justify">
+                        {guide.shortDescription}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-gray-900 flex items-center justify-between text-[10px]">
+                      <span className="text-slate-400 font-semibold">{guide.readTime}</span>
+                      <button
+                        onClick={() => onNavigate(`/guides/${guide.slug}`)}
+                        className="font-bold text-emerald-600 hover:text-emerald-700 transition-colors flex items-center gap-1 cursor-pointer focus:outline-none"
+                        id={`related-guide-card-btn-${guide.slug}`}
+                      >
+                        <span>Read Guide</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
 
         </div>

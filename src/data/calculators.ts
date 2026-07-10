@@ -43,7 +43,7 @@ export const CALCULATORS: CalculatorConfig[] = [
       }
     ],
     relatedSlugs: ['calorie-calculator', 'ideal-weight-calculator', 'body-fat-calculator'],
-    relatedGuideSlugs: ['what-is-bmi', 'weight-loss-fundamentals']
+    relatedGuideSlugs: ['bmi-for-men', 'bmi-for-women', 'bmi-limitations', 'bmi-categories-explained']
   },
   {
     slug: 'bmr-calculator',

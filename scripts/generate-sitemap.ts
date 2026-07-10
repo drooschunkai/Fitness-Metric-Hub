@@ -22,7 +22,7 @@ function generateSitemap() {
   const calculatorPages = CALCULATORS.map(c => `/calculators/${c.slug}`);
   const guidePages = GUIDES.map(g => `/guides/${g.slug}`);
 
-  const allPages = [...corePages, ...calculatorPages, ...guidePages];
+  const allPages = Array.from(new Set([...corePages, ...calculatorPages, ...guidePages]));
 
   // Format today's date in YYYY-MM-DD
   const today = new Date().toISOString().split('T')[0];

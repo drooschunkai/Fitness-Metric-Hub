@@ -2,7 +2,7 @@ import { GuideArticle } from '../types';
 import { CLUSTER_GUIDES } from './guides_clusters';
 import { PHASE2_GUIDES } from './phase2_guides';
 
-export const GUIDES: GuideArticle[] = [
+const ALL_GUIDES_RAW: GuideArticle[] = [
   {
     slug: 'what-is-bmi',
     title: 'What Is BMI? Understanding Body Mass Index',
@@ -437,3 +437,12 @@ export const GUIDES: GuideArticle[] = [
   ...CLUSTER_GUIDES,
   ...PHASE2_GUIDES
 ];
+
+const uniqueGuidesMap = new Map<string, GuideArticle>();
+ALL_GUIDES_RAW.forEach(guide => {
+  if (!uniqueGuidesMap.has(guide.slug)) {
+    uniqueGuidesMap.set(guide.slug, guide);
+  }
+});
+
+export const GUIDES: GuideArticle[] = Array.from(uniqueGuidesMap.values());

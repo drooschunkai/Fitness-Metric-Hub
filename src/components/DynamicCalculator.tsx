@@ -5,6 +5,7 @@ import GaugeChart, { GaugeRange } from './GaugeChart';
 
 interface DynamicCalculatorProps {
   config: CalculatorConfig;
+  key?: string;
 }
 
 export default function DynamicCalculator({ config }: DynamicCalculatorProps) {

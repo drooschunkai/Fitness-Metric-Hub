@@ -298,7 +298,7 @@ export function TagPageRoute() {
 
 export function CalculatorDetailRoute() {
   const navigate = useNavigate();
-  const { slug } = useParams();
+  const { slug: urlSlug } = useParams();
   const location = useLocation();
   const handleNavigate = (path: string) => {
     navigate(path);
@@ -306,6 +306,12 @@ export function CalculatorDetailRoute() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  let slug = urlSlug;
+  if (!slug) {
+    const parts = location.pathname.split('/');
+    slug = parts[parts.length - 1];
+  }
 
   const calcConfig = CALCULATORS.find(c => c.slug === slug);
   if (!calcConfig) {
@@ -336,7 +342,7 @@ export function CalculatorDetailRoute() {
       onNavigate={handleNavigate}
     >
       {calcConfig.isDynamic ? (
-        <DynamicCalculator config={calcConfig} />
+        <DynamicCalculator key={calcConfig.slug} config={calcConfig} />
       ) : (
         getCalculatorComponent(slug || '')
       )}
@@ -346,7 +352,7 @@ export function CalculatorDetailRoute() {
 
 export function GuideDetailRoute() {
   const navigate = useNavigate();
-  const { slug } = useParams();
+  const { slug: urlSlug } = useParams();
   const location = useLocation();
   const handleNavigate = (path: string) => {
     navigate(path);
@@ -354,6 +360,12 @@ export function GuideDetailRoute() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  let slug = urlSlug;
+  if (!slug) {
+    const parts = location.pathname.split('/');
+    slug = parts[parts.length - 1];
+  }
 
   const guideConfig = GUIDES.find(g => g.slug === slug);
   if (!guideConfig) {
@@ -383,6 +395,16 @@ export const routes = [
       { path: 'disclaimer', Component: DisclaimerPage },
       { path: 'sitemap', Component: SitemapPageRoute },
       { path: 'calculators', Component: CalculatorsPageRoute },
+      // Programmatic concrete paths for static pre-rendering
+      ...CALCULATORS.map(c => ({
+        path: `calculators/${c.slug}`,
+        Component: CalculatorDetailRoute
+      })),
+      ...GUIDES.map(g => ({
+        path: `guides/${g.slug}`,
+        Component: GuideDetailRoute
+      })),
+      // Wildcard dynamic fallbacks for client side
       {
         path: 'calculators/:slug',
         Component: CalculatorDetailRoute,

@@ -1596,7 +1596,8 @@ export const PHASE2_CALCULATORS: CalculatorConfig[] = [
       return { maxHr };
     },
     resultExplanation: (inputs, results) => {
-      return `Using the **${inputs.formula.toUpperCase()}** method, your estimated peak maximum heart rate is **${results.maxHr} bpm**. Use this value to configure your cardiac training zones.`;
+      const formulaName = (inputs.formula || 'tanaka').toUpperCase();
+      return `Using the **${formulaName}** method, your estimated peak maximum heart rate is **${results.maxHr} bpm**. Use this value to configure your cardiac training zones.`;
     }
   },
   {

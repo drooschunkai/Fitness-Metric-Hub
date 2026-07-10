@@ -182,33 +182,35 @@ export function AppLayout() {
       </main>
 
       {/* Interactive Developer SEO Sandbox overlay footer */}
-      <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-150 dark:border-gray-800 py-6 px-4">
-        <div className="max-w-7xl mx-auto space-y-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">
-                Developer Sandboxed Audit Suite
-              </h3>
-              <p className="text-xs text-gray-500 mt-1">
-                FitMetricsHub operates dynamic SEO optimization & sitemaps directly. Expand the tool below to audit JSON-LD & meta schemas.
-              </p>
+      {import.meta.env.DEV && (
+        <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-150 dark:border-gray-800 py-6 px-4">
+          <div className="max-w-7xl mx-auto space-y-4">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">
+                  Developer Sandboxed Audit Suite
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">
+                  FitMetricsHub operates dynamic SEO optimization & sitemaps directly. Expand the tool below to audit JSON-LD & meta schemas.
+                </p>
+              </div>
+              <button
+                onClick={() => setInspectorOpen(!inspectorOpen)}
+                className="bg-slate-900 hover:bg-slate-800 text-slate-100 font-bold text-xs py-2 px-4 rounded-xl shadow-xs transition-all cursor-pointer"
+                id="toggle-seo-inspector-btn"
+              >
+                {inspectorOpen ? 'Collapse Schema Inspector' : 'Inspect Dynamic SEO & AdSense Metas'}
+              </button>
             </div>
-            <button
-              onClick={() => setInspectorOpen(!inspectorOpen)}
-              className="bg-slate-900 hover:bg-slate-800 text-slate-100 font-bold text-xs py-2 px-4 rounded-xl shadow-xs transition-all cursor-pointer"
-              id="toggle-seo-inspector-btn"
-            >
-              {inspectorOpen ? 'Collapse Schema Inspector' : 'Inspect Dynamic SEO & AdSense Metas'}
-            </button>
-          </div>
 
-          {inspectorOpen && (
-            <div className="animate-in slide-in-from-bottom-2 duration-300">
-              <SEOOverview route={routeState} />
-            </div>
-          )}
+            {inspectorOpen && (
+              <div className="animate-in slide-in-from-bottom-2 duration-300">
+                <SEOOverview route={routeState} />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Standard legal disclaimer and shortcuts footer */}
       <Footer onNavigate={handleNavigate} />

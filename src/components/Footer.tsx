@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Activity, ShieldCheck, Heart } from 'lucide-react';
 
 interface FooterProps {
@@ -8,11 +9,6 @@ interface FooterProps {
 export default function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
-    e.preventDefault();
-    onNavigate(path);
-  };
-
   return (
     <footer className="bg-slate-50 text-slate-600 border-t border-slate-200 dark:bg-slate-950 dark:border-slate-800" id="main-footer">
       {/* Upper Footer section */}
@@ -20,9 +16,8 @@ export default function Footer({ onNavigate }: FooterProps) {
         
         {/* Column 1: FitMetricsHub & Mission Statement */}
         <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
-          <a
-            href="/"
-            onClick={(e) => handleLinkClick(e, '/')}
+          <Link
+            to="/"
             className="flex items-center gap-2 text-slate-900 hover:text-emerald-600 dark:text-white dark:hover:text-emerald-400 transition-colors cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded"
             id="footer-logo-btn"
           >
@@ -32,7 +27,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             <span className="text-lg font-bold tracking-tight">
               FitMetrics<span className="text-emerald-600 dark:text-emerald-400">Hub</span>
             </span>
-          </a>
+          </Link>
           <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
             FitMetricsHub is committed to improving global health literacy by providing peer-reviewed, medically validated, and highly accurate metabolic calculations and comprehensive educational fitness tools.
           </p>
@@ -49,54 +44,54 @@ export default function Footer({ onNavigate }: FooterProps) {
           </h3>
           <ul className="space-y-2.5 text-xs">
             <li>
-              <a href="#/calculators/bmi-calculator" onClick={(e) => handleLinkClick(e, '/calculators/bmi-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/bmi-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 BMI Calculator
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/calculators/calorie-calculator" onClick={(e) => handleLinkClick(e, '/calculators/calorie-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/calorie-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Calorie Calculator
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/calculators/ideal-weight-calculator" onClick={(e) => handleLinkClick(e, '/calculators/ideal-weight-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/ideal-weight-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Ideal Weight
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/calculators/protein-calculator" onClick={(e) => handleLinkClick(e, '/calculators/protein-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/protein-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Protein Calculator
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/calculators/macro-calculator" onClick={(e) => handleLinkClick(e, '/calculators/macro-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/macro-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Macro Calculator
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/calculators/water-calculator" onClick={(e) => handleLinkClick(e, '/calculators/water-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/water-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Water Intake
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/calculators/body-fat-calculator" onClick={(e) => handleLinkClick(e, '/calculators/body-fat-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/body-fat-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Body Fat
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/calculators/lean-body-mass-calculator" onClick={(e) => handleLinkClick(e, '/calculators/lean-body-mass-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/lean-body-mass-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Lean Body Mass
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/calculators/bmr-calculator" onClick={(e) => handleLinkClick(e, '/calculators/bmr-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/bmr-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 BMR Calculator
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/calculators/walking-calories-calculator" onClick={(e) => handleLinkClick(e, '/calculators/walking-calories-calculator')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators/walking-calories-calculator" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Walking Calories
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -108,24 +103,24 @@ export default function Footer({ onNavigate }: FooterProps) {
           </h3>
           <ul className="space-y-2.5 text-xs">
             <li>
-              <a href="#/" onClick={(e) => handleLinkClick(e, '/')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Weight Management
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/" onClick={(e) => handleLinkClick(e, '/')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Nutrition & Macros
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/" onClick={(e) => handleLinkClick(e, '/')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Body Composition
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/" onClick={(e) => handleLinkClick(e, '/')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Fitness Performance
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -137,29 +132,29 @@ export default function Footer({ onNavigate }: FooterProps) {
           </h3>
           <ul className="space-y-2.5 text-xs">
             <li>
-              <a href="#/guides/what-is-bmi" onClick={(e) => handleLinkClick(e, '/guides/what-is-bmi')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/guides/what-is-bmi" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 What Is BMI?
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/guides/how-many-calories-should-i-eat" onClick={(e) => handleLinkClick(e, '/guides/how-many-calories-should-i-eat')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/guides/how-many-calories-should-i-eat" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Understanding BMR
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/guides/weight-loss-fundamentals" onClick={(e) => handleLinkClick(e, '/guides/weight-loss-fundamentals')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/guides/weight-loss-fundamentals" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Daily Calorie Needs
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/guides/protein-intake-guide" onClick={(e) => handleLinkClick(e, '/guides/protein-intake-guide')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/guides/protein-intake-guide" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Protein Intake Guide
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/guides/understanding-body-fat-percentage" onClick={(e) => handleLinkClick(e, '/guides/understanding-body-fat-percentage')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/guides/understanding-body-fat-percentage" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Body Fat Percentage
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -171,19 +166,19 @@ export default function Footer({ onNavigate }: FooterProps) {
           </h3>
           <ul className="space-y-2.5 text-xs">
             <li>
-              <a href="#/about" onClick={(e) => handleLinkClick(e, '/about')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/about" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/contact" onClick={(e) => handleLinkClick(e, '/contact')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/contact" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Contact
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/about" onClick={(e) => handleLinkClick(e, '/about')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/about" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Editorial Policy
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -195,24 +190,24 @@ export default function Footer({ onNavigate }: FooterProps) {
           </h3>
           <ul className="space-y-2.5 text-xs">
             <li>
-              <a href="#/privacy" onClick={(e) => handleLinkClick(e, '/privacy')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline" id="footer-privacy-btn">
+              <Link to="/privacy" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline" id="footer-privacy-btn">
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/terms" onClick={(e) => handleLinkClick(e, '/terms')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline" id="footer-terms-btn">
+              <Link to="/terms" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline" id="footer-terms-btn">
                 Terms of Service
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/disclaimer" onClick={(e) => handleLinkClick(e, '/disclaimer')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline" id="footer-disclaimer-btn">
+              <Link to="/disclaimer" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline" id="footer-disclaimer-btn">
                 Disclaimer
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/sitemap" onClick={(e) => handleLinkClick(e, '/sitemap')} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline" id="footer-sitemap-btn">
+              <Link to="/sitemap" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline" id="footer-sitemap-btn">
                 Sitemap
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

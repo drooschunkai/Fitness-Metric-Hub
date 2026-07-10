@@ -87,11 +87,6 @@ export default function AdPlaceholder({ type, className = "" }: AdPlaceholderPro
               </button>
             </div>
           </div>
-          
-          <div className="mt-3 pt-2.5 border-t border-dashed border-slate-200 dark:border-gray-800/60 flex items-center gap-1.5 text-[10px] text-slate-400">
-            <ShieldAlert className="h-3 w-3 text-amber-500 shrink-0" />
-            <span><strong className="text-slate-500 dark:text-gray-400">AdSense Policy Ready:</strong> {config.policyNote}</span>
-          </div>
         </div>
       ) : (
         <div className="p-3 border-b border-x border-dashed border-slate-200 dark:border-gray-800/40 rounded-b-lg text-center bg-slate-50/50 text-xs text-slate-400 italic">

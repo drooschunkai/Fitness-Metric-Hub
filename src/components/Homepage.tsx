@@ -21,11 +21,11 @@ export default function Homepage({ onNavigate }: HomepageProps) {
 
   // Snapshot Metrics Count Up State Animation
   const [metrics, setMetrics] = React.useState({
-    bmi: 15.0,
-    calories: 1200,
-    protein: 80,
-    water: 1.0,
-    bodyFat: 10,
+    bmi: 22.0,
+    calories: 2200,
+    protein: 115,
+    water: 2.7,
+    bodyFat: 20,
   });
 
   React.useEffect(() => {
@@ -40,11 +40,11 @@ export default function Homepage({ onNavigate }: HomepageProps) {
       const ease = 1 - Math.pow(1 - progress, 3); // Smooth cubic ease-out
 
       setMetrics({
-        bmi: parseFloat((18.0 + (22.4 - 18.0) * ease).toFixed(1)),
-        calories: Math.round(1500 + (2350 - 1500) * ease),
-        protein: Math.round(100 + (155 - 100) * ease),
-        water: parseFloat((1.5 + (3.1 - 1.5) * ease).toFixed(1)),
-        bodyFat: Math.round(28 - (28 - 18) * ease)
+        bmi: parseFloat((19.5 + (22.0 - 19.5) * ease).toFixed(1)),
+        calories: Math.round(1800 + (2200 - 1800) * ease),
+        protein: Math.round(85 + (115 - 85) * ease),
+        water: parseFloat((1.8 + (2.7 - 1.8) * ease).toFixed(1)),
+        bodyFat: Math.round(26 - (26 - 20) * ease)
       });
 
       if (start >= end) {
@@ -223,7 +223,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                         style={{ width: `${Math.min(100, (metrics.bmi / 35) * 100)}%` }}
                       ></div>
                     </div>
-                    <span className="text-[9px] text-emerald-600 font-bold uppercase tracking-wider">Perfect Balance</span>
+                    <span className="text-[9px] text-emerald-600 font-bold uppercase tracking-wider">Normal Range</span>
                   </div>
 
                   {/* Calories Widget */}
@@ -287,7 +287,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                       <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block">Body Fat Ratio</span>
                       <div className="flex items-baseline gap-1.5">
                         <span className="text-2xl font-extrabold text-slate-800 dark:text-white">{metrics.bodyFat}%</span>
-                        <span className="text-xs text-emerald-600 font-semibold bg-emerald-50 dark:bg-emerald-950/30 px-1.5 py-0.5 rounded">Athletic Baseline</span>
+                        <span className="text-xs text-emerald-600 font-semibold bg-emerald-50 dark:bg-emerald-950/30 px-1.5 py-0.5 rounded">Fitness Range</span>
                       </div>
                     </div>
                     <div className="w-16 h-16 relative flex items-center justify-center">
@@ -599,7 +599,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
               category: 'Weight Management',
               excerpt: 'Understand BMI, how it is calculated, and what your result means.',
               readTime: '5 min read',
-              author: 'FitMetrics Medical Advisory Board'
+              author: 'FitMetricsHub Editorial Team'
             },
             {
               slug: 'how-many-calories-should-i-eat',
@@ -607,7 +607,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
               category: 'Nutrition',
               excerpt: 'Learn how your Basal Metabolic Rate affects calorie requirements.',
               readTime: '6 min read',
-              author: 'FitMetrics Medical Advisory Board'
+              author: 'FitMetricsHub Editorial Team'
             },
             {
               slug: 'weight-loss-fundamentals',
@@ -615,7 +615,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
               category: 'Weight Management',
               excerpt: 'Find out how many calories you should consume each day.',
               readTime: '7 min read',
-              author: 'FitMetrics Medical Advisory Board'
+              author: 'FitMetricsHub Editorial Team'
             },
             {
               slug: 'protein-intake-guide',
@@ -623,7 +623,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
               category: 'Nutrition',
               excerpt: 'How much protein do you need for muscle gain or weight loss?',
               readTime: '7 min read',
-              author: 'FitMetrics Medical Advisory Board'
+              author: 'FitMetricsHub Editorial Team'
             },
             {
               slug: 'understanding-body-fat-percentage',
@@ -631,7 +631,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
               category: 'Body Composition',
               excerpt: 'Learn how body fat is measured and why it matters.',
               readTime: '6 min read',
-              author: 'FitMetrics Medical Advisory Board'
+              author: 'FitMetricsHub Editorial Team'
             }
           ].map((item) => {
             return (
@@ -767,7 +767,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
               },
               {
                 q: "Do you offer personalized coaching?",
-                a: "While we do not provide one-on-one personal coaching directly through the platform, we offer comprehensive, scientifically backed guides, educational resources, and standard fitness frameworks to help you self-direct your training and nutrition. We also feature trusted, high-quality sponsored services to help you reach your goals."
+                a: "While we do not provide one-on-one personal coaching directly through the platform, we offer comprehensive, scientifically backed guides, educational resources, and standard fitness frameworks to help you self-direct your training and nutrition."
               }
             ].map((item, idx) => {
               const isExpanded = expandedFaq === idx;
@@ -894,7 +894,7 @@ export default function Homepage({ onNavigate }: HomepageProps) {
                     "name": "Do you offer personalized coaching?",
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "While we do not provide one-on-one personal coaching directly through the platform, we offer comprehensive, scientifically backed guides, educational resources, and standard fitness frameworks to help you self-direct your training and nutrition. We also feature trusted, high-quality sponsored services to help you reach your goals."
+                      "text": "While we do not provide one-on-one personal coaching directly through the platform, we offer comprehensive, scientifically backed guides, educational resources, and standard fitness frameworks to help you self-direct your training and nutrition."
                     }
                   }
                 ]

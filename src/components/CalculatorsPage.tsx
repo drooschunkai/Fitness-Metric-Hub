@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { CALCULATORS } from '../data/calculators';
 import CalculatorCard from './CalculatorCard';
 import AdPlaceholder from './AdPlaceholder';
@@ -14,6 +15,17 @@ interface CalculatorsPageProps {
 export default function CalculatorsPage({ onNavigate }: CalculatorsPageProps) {
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'weight-management' | 'nutrition' | 'fitness-performance' | 'body-composition' | 'hydration-health' | 'endurance-performance' | 'strength-training' | 'womens-health' | 'longevity'>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get('category');
+    const hashParam = location.hash ? location.hash.replace('#', '') : '';
+    const activeCategory = categoryParam || hashParam;
+    if (activeCategory) {
+      setSelectedCategory(activeCategory as any);
+    }
+  }, [location.search, location.hash]);
 
   // Filter based on both category selection and search query
   const filteredCalculators = CALCULATORS.filter((calc) => {

@@ -29,9 +29,8 @@ export default function Footer({ onNavigate }: FooterProps) {
             </span>
           </Link>
           <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-justify">
-            FitMetricsHub is committed to improving global health literacy by providing peer-reviewed, medically validated, and highly accurate metabolic calculations and comprehensive educational fitness tools.
+            FitMetricsHub is committed to improving global health literacy by providing highly accurate metabolic calculations based on peer-reviewed clinical formulas and validated methodologies, alongside comprehensive educational fitness tools.
           </p>
-
         </div>
 
         {/* Column 2: Calculators */}
@@ -100,22 +99,22 @@ export default function Footer({ onNavigate }: FooterProps) {
           </h3>
           <ul className="space-y-2.5 text-xs">
             <li>
-              <Link to="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators?category=weight-management" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Weight Management
               </Link>
             </li>
             <li>
-              <Link to="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators?category=nutrition" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Nutrition & Macros
               </Link>
             </li>
             <li>
-              <Link to="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators?category=body-composition" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Body Composition
               </Link>
             </li>
             <li>
-              <Link to="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
+              <Link to="/calculators?category=fitness-performance" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors focus:outline-none focus:underline">
                 Fitness Performance
               </Link>
             </li>

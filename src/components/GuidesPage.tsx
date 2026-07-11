@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { GUIDES } from '../data/guides';
 import AdPlaceholder from './AdPlaceholder';
 import { 
@@ -24,6 +24,17 @@ const filterCategories = [
 export default function GuidesPage({ onNavigate }: GuidesPageProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get('category');
+    const hashParam = location.hash ? location.hash.replace('#', '') : '';
+    const activeCategory = categoryParam || hashParam;
+    if (activeCategory) {
+      setSelectedCategory(activeCategory);
+    }
+  }, [location.search, location.hash]);
 
   // Filter based on selected category and search query
   const filteredGuides = GUIDES.filter((guide) => {

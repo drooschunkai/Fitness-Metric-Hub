@@ -16,7 +16,8 @@ function generateSitemap() {
     '/terms',
     '/disclaimer',
     '/sitemap',
-    '/calculators'
+    '/calculators',
+    '/guides'
   ];
 
   const calculatorPages = CALCULATORS.map(c => `/calculators/${c.slug}`);
@@ -41,7 +42,7 @@ function generateSitemap() {
     if (pagePath === '/') {
       priority = '1.0';
       changefreq = 'daily';
-    } else if (pagePath === '/calculators') {
+    } else if (pagePath === '/calculators' || pagePath === '/guides') {
       priority = '0.9';
       changefreq = 'weekly';
     } else if (pagePath.startsWith('/calculators/')) {

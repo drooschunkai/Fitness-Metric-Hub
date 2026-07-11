@@ -5,6 +5,7 @@ export default function BmiCalculator() {
   const [activeTab, setActiveTab] = useState<'us' | 'metric' | 'other'>('us');
   const [age, setAge] = useState<string>('25');
   const [gender, setGender] = useState<'male' | 'female'>('male');
+  const [error, setError] = useState<string | null>(null);
   
   // US inputs
   const [heightFt, setHeightFt] = useState<string>('5');
@@ -37,6 +38,7 @@ export default function BmiCalculator() {
     let wKg = 0;
     let hM = 0;
     const ageNum = parseInt(age) || 25;
+    setError(null);
 
     if (activeTab === 'us') {
       const ft = parseFloat(heightFt) || 0;
@@ -63,7 +65,8 @@ export default function BmiCalculator() {
     }
 
     if (wKg <= 0 || hM <= 0) {
-      alert('Please enter valid positive numbers for height and weight.');
+      setError('Please enter valid positive numbers for height and weight.');
+      setResult(null);
       return;
     }
 
@@ -188,6 +191,7 @@ export default function BmiCalculator() {
     setWeightSt('11');
     setWeightStLbs('6');
     setHeightOtherCm('178');
+    setError(null);
     setResult(null);
   };
 
@@ -489,6 +493,13 @@ export default function BmiCalculator() {
               <span>Clear</span>
             </button>
           </div>
+
+          {error && (
+            <div className="mt-3 p-3 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/40 rounded-xl text-xs text-red-600 dark:text-red-400 font-semibold flex items-start gap-2 animate-in fade-in slide-in-from-top-1 duration-200">
+              <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" />
+              <span>{error}</span>
+            </div>
+          )}
         </div>
 
         {/* Right Result: Display (6 cols on desktop) */}

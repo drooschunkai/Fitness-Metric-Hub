@@ -668,6 +668,17 @@ export default function Homepage({ onNavigate }: HomepageProps) {
             );
           })}
         </div>
+
+        <div className="flex justify-center pt-4">
+          <button
+            onClick={() => onNavigate('/guides')}
+            className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 hover:bg-emerald-100 dark:hover:bg-emerald-950/40 font-bold py-2.5 px-6 rounded-xl transition-all cursor-pointer text-sm"
+            id="view-all-guides-btn"
+          >
+            <span>View All Health Guides</span>
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
       </section>
 
       {/* 7. NEWSLETTER SECTION */}

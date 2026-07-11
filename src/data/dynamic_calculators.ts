@@ -885,9 +885,28 @@ export const DYNAMIC_CALCULATORS: CalculatorConfig[] = [
       { label: 'Muscular Classification', valueKey: 'classification', isCustomText: true, color: 'text-indigo-500' }
     ],
     calculate: (inputs, unit) => {
-      const weightKg = unit === 'metric' ? Number(inputs.weight) : Number(inputs.weight) * 0.453592;
-      const heightM = unit === 'metric' ? Number(inputs.height) / 100 : (Number(inputs.height) * 2.54) / 100;
+      const weightRaw = Number(inputs.weight);
+      const heightRaw = Number(inputs.height);
       const fatPct = Number(inputs.bodyFat);
+
+      if (!weightRaw || !heightRaw || isNaN(weightRaw) || isNaN(heightRaw)) {
+        return {
+          ffmi: '0.0',
+          adjustedFfmi: '0.0',
+          classification: 'Pending Inputs'
+        };
+      }
+
+      const weightKg = unit === 'metric' ? weightRaw : weightRaw * 0.45359237;
+      const heightM = unit === 'metric' ? heightRaw / 100 : (heightRaw * 2.54) / 100;
+
+      if (heightM <= 0) {
+        return {
+          ffmi: '0.0',
+          adjustedFfmi: '0.0',
+          classification: 'Pending Inputs'
+        };
+      }
 
       const lbm = weightKg * (1 - fatPct / 100);
       const ffmi = lbm / (heightM * heightM);
@@ -895,12 +914,15 @@ export const DYNAMIC_CALCULATORS: CalculatorConfig[] = [
 
       let classification = 'Average';
       if (adjustedFfmi > 25) classification = 'Superior (Typically Assisted)';
-      else if (adjustedFfmi > 22) classification = 'Excellent (Highly Muscular)';
-      else if (adjustedFfmi < 18) classification = 'Slightly Muscled / Underdeveloped';
+      else if (adjustedFfmi >= 23) classification = 'Exceptional / Elite (Natural Limit)';
+      else if (adjustedFfmi >= 21) classification = 'Well-Developed Athletic Build';
+      else if (adjustedFfmi >= 18) classification = 'Average / Healthy';
+      else if (adjustedFfmi < 16) classification = 'Low Muscle Mass';
+      else classification = 'Slightly Muscled / Underdeveloped';
 
       return {
-        ffmi: ffmi.toFixed(1),
-        adjustedFfmi: adjustedFfmi.toFixed(1),
+        ffmi: isNaN(ffmi) || !isFinite(ffmi) ? '0.0' : ffmi.toFixed(1),
+        adjustedFfmi: isNaN(adjustedFfmi) || !isFinite(adjustedFfmi) ? '0.0' : adjustedFfmi.toFixed(1),
         classification
       };
     },

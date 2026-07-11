@@ -16,17 +16,59 @@ interface GuideViewProps {
 export default function GuideView({ article, route, onNavigate }: GuideViewProps) {
   // Breadcrumb paths
   const breadcrumbItems = [
-    { label: 'Health Guides' },
+    { label: 'Health Guides', path: '/guides' },
     { label: article.title }
   ];
 
   // Resolve calculators linked to this guide
   const linkedCalculators = CALCULATORS.filter(c => article.relatedCalculators.includes(c.slug));
 
-  const handleTocClick = (id: string) => {
-    const el = document.getElementById(id);
+  const handleTocClick = (id: string, text: string) => {
+    // 1. Try to find by ID directly
+    let el = document.getElementById(id);
+
+    // 2. If not found, try to find by the auto-generated slug of the text
+    if (!el) {
+      const cleanText = text.replace(/^\d+\.\s*/, ''); // strip leading numbers like "1. "
+      const generatedId = cleanText.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      el = document.getElementById(generatedId);
+    }
+
+    // 3. Fallback: try generating the exact slug with the leading numbers
+    if (!el) {
+      const generatedIdWithNum = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      el = document.getElementById(generatedIdWithNum);
+    }
+
+    // 4. If still not found, search all h1, h2, h3 tags for matching text
+    if (!el) {
+      const headers = document.querySelectorAll('h1, h2, h3');
+      for (const header of Array.from(headers)) {
+        const headerText = header.textContent?.trim().toLowerCase();
+        const targetText = text.trim().toLowerCase();
+        if (headerText && targetText) {
+          // Check if they are equal or if one contains the other (stripping leading numbers/dots)
+          const cleanHeaderText = headerText.replace(/^\d+[\.\s]*/, '').trim();
+          const cleanTargetText = targetText.replace(/^\d+[\.\s]*/, '').trim();
+          if (
+            headerText === targetText ||
+            cleanHeaderText === cleanTargetText ||
+            headerText.includes(targetText) ||
+            targetText.includes(headerText) ||
+            (cleanHeaderText && cleanTargetText && (cleanHeaderText.includes(cleanTargetText) || cleanTargetText.includes(cleanHeaderText)))
+          ) {
+            el = header as HTMLElement;
+            break;
+          }
+        }
+      }
+    }
+
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
 
@@ -52,7 +94,7 @@ export default function GuideView({ article, route, onNavigate }: GuideViewProps
               {article.toc.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleTocClick(item.id)}
+                  onClick={() => handleTocClick(item.id, item.text)}
                   className="w-full text-left text-xs font-semibold text-gray-600 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors cursor-pointer block truncate py-1 border-l-2 border-transparent hover:border-emerald-500 pl-2.5"
                   id={`toc-link-${item.id}`}
                 >
@@ -96,7 +138,24 @@ export default function GuideView({ article, route, onNavigate }: GuideViewProps
           </div>
 
           {/* Render article contents */}
-          <article className="prose prose-sm md:prose max-w-none text-gray-700 dark:text-gray-300">
+          <article 
+            className="prose prose-sm md:prose max-w-none text-gray-700 dark:text-gray-300"
+            onClick={(e) => {
+              const target = e.target as HTMLElement;
+              const anchor = target.closest('a');
+              if (anchor) {
+                const href = anchor.getAttribute('href');
+                if (href) {
+                  // If it starts with / or has onNavigate: prefix, handle via SPA routing
+                  if (href.startsWith('/') || href.startsWith('onNavigate:')) {
+                    e.preventDefault();
+                    const cleanPath = href.replace('onNavigate:', '');
+                    onNavigate(cleanPath);
+                  }
+                }
+              }
+            }}
+          >
             <div dangerouslySetInnerHTML={{ __html: article.content.trim().startsWith('<') ? article.content : parseMarkdownToHtml(article.content) }} />
           </article>
 

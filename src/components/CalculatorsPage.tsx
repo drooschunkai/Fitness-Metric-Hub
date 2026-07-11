@@ -110,30 +110,28 @@ export default function CalculatorsPage({ onNavigate }: CalculatorsPageProps) {
         </p>
       </div>
 
-      {/* AD PLACEMENT TOP */}
-      <AdPlaceholder type="top-banner" />
-
       {/* 2. SEARCH & FILTER DOCK */}
-      <div className="bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 p-6 rounded-2xl space-y-4 shadow-xs" id="search-filter-dock">
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-          
-          {/* Quick Search inside page */}
-          <div className="relative w-full md:max-w-md">
+      <div className="bg-slate-50 dark:bg-gray-900/50 border border-slate-200 dark:border-gray-800 p-6 rounded-2xl space-y-5 shadow-xs" id="search-filter-dock">
+        {/* Search Bar on Top */}
+        <div className="flex justify-center">
+          <div className="relative w-full max-w-2xl">
             <input
               type="text"
               placeholder="Search through all estimators..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-gray-800 rounded-lg bg-white dark:bg-gray-950 text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 font-medium"
+              className="w-full pl-11 pr-4 py-2.5 border border-slate-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-950 text-slate-800 dark:text-white text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 font-medium shadow-2xs"
               id="calculator-page-search"
             />
-            <Search className="absolute left-3.5 top-3 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-4 top-3.5 h-4.5 w-4.5 text-slate-400" />
           </div>
+        </div>
 
-          {/* Category tabs */}
-          <div className="flex flex-wrap gap-1 bg-slate-200/50 dark:bg-gray-950 p-1 border border-slate-200/50 dark:border-gray-800 rounded-lg w-full md:w-auto overflow-x-auto justify-start md:justify-end">
+        {/* Categories in a Single horizontal scrollable Lane */}
+        <div className="w-full overflow-x-auto no-scrollbar">
+          <div className="flex flex-nowrap gap-1.5 p-1 bg-slate-200/50 dark:bg-gray-950 border border-slate-200/50 dark:border-gray-800 rounded-xl w-max mx-auto min-w-full md:min-w-0 justify-start md:justify-center">
             {[
-              { id: 'all', label: 'All' },
+              { id: 'all', label: 'All Tools' },
               { id: 'weight-management', label: 'Weight' },
               { id: 'nutrition', label: 'Nutrition' },
               { id: 'fitness-performance', label: 'Performance' },
@@ -149,10 +147,10 @@ export default function CalculatorsPage({ onNavigate }: CalculatorsPageProps) {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id as any)}
-                  className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                  className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                     isActive
                       ? 'bg-emerald-600 text-white shadow-sm'
-                      : 'text-slate-500 hover:text-slate-850 dark:hover:text-slate-200'
+                      : 'text-slate-500 hover:text-slate-850 dark:hover:text-slate-200 hover:bg-white/40 dark:hover:bg-gray-900/40'
                   }`}
                   id={`calc-page-tab-${cat.id}`}
                 >
@@ -161,7 +159,6 @@ export default function CalculatorsPage({ onNavigate }: CalculatorsPageProps) {
               );
             })}
           </div>
-
         </div>
       </div>
 
@@ -269,6 +266,11 @@ export default function CalculatorsPage({ onNavigate }: CalculatorsPageProps) {
           })}
         </div>
       </section>
+
+      {/* AD PLACEMENT BOTTOM (RELOCATED FROM TOP) */}
+      <div className="pt-6">
+        <AdPlaceholder type="top-banner" />
+      </div>
 
     </div>
   );

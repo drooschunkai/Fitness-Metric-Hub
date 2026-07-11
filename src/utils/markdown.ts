@@ -12,21 +12,24 @@ export function parseMarkdownToHtml(markdown: string): string {
   // Escaping simple italics
   html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
+  // Links parsing: [text](url)
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 font-semibold underline decoration-dotted decoration-emerald-500/50 hover:decoration-solid transition-colors">$1</a>');
+
   // Standard inline code ticks
   html = html.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 bg-slate-100 dark:bg-gray-900 text-emerald-600 dark:text-emerald-400 font-mono text-xs rounded-md border border-slate-200/50 dark:border-gray-800">$1</code>');
 
   // Headers parsing with automatic HTML id tagging for Table of Contents mapping
   html = html.replace(/^### (.*?)$/gm, (match, p1) => {
     const id = p1.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    return `<h3 id="${id}" class="text-base font-bold mt-5 mb-2.5 text-gray-900 dark:text-white">${p1}</h3>`;
+    return `<h3 id="${id}" class="text-base font-bold mt-5 mb-2.5 text-gray-900 dark:text-white scroll-mt-24">${p1}</h3>`;
   });
   html = html.replace(/^## (.*?)$/gm, (match, p1) => {
     const id = p1.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    return `<h2 id="${id}" class="text-xl font-bold mt-7 mb-3 text-gray-900 dark:text-white border-b border-slate-150 pb-1.5 dark:border-gray-850">${p1}</h2>`;
+    return `<h2 id="${id}" class="text-xl font-bold mt-7 mb-3 text-gray-900 dark:text-white border-b border-slate-150 pb-1.5 dark:border-gray-850 scroll-mt-24">${p1}</h2>`;
   });
   html = html.replace(/^# (.*?)$/gm, (match, p1) => {
     const id = p1.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    return `<h1 id="${id}" class="text-2xl font-extrabold mt-8 mb-4 text-gray-950 dark:text-white">${p1}</h1>`;
+    return `<h1 id="${id}" class="text-2xl font-extrabold mt-8 mb-4 text-gray-950 dark:text-white scroll-mt-24">${p1}</h1>`;
   });
 
   // Blockquotes

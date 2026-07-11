@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CalculatorConfig } from '../types';
 import { Scale, RefreshCw, AlertCircle } from 'lucide-react';
 import GaugeChart, { GaugeRange } from './GaugeChart';
+import { parseMarkdownToHtml } from '../utils/markdown';
 
 interface DynamicCalculatorProps {
   config: CalculatorConfig;
@@ -100,7 +101,7 @@ export default function DynamicCalculator({ config }: DynamicCalculatorProps) {
 
   // Resolve main output score and define simple gauge ranges dynamically for visual beauty
   const mainOutput = config.outputs?.[0];
-  const mainValue = results[mainOutput?.valueKey ?? ''] ?? 0;
+  const rawMainValue = results[mainOutput?.valueKey ?? ''] ?? 0;
   
   // Custom ranges for specific calculators to light up the GaugeChart beautifully
   const getCustomGaugeRanges = (): GaugeRange[] | undefined => {
@@ -110,6 +111,15 @@ export default function DynamicCalculator({ config }: DynamicCalculatorProps) {
         { label: 'Healthy/Normal', min: 0.42, max: 0.50, color: '#10b981', textColor: '#059669' },
         { label: 'Overweight Risk', min: 0.50, max: 0.55, color: '#f59e0b', textColor: '#d97706' },
         { label: 'Highly Elevated', min: 0.55, max: 1.0, color: '#ef4444', textColor: '#dc2626' }
+      ];
+    }
+    if (config.slug === 'ffmi-calculator') {
+      return [
+        { label: 'Slightly Muscled', min: 0, max: 17.9, color: '#94a3b8', textColor: '#64748b' },
+        { label: 'Average', min: 18.0, max: 20.9, color: '#3b82f6', textColor: '#2563eb' },
+        { label: 'Athletic Build', min: 21.0, max: 22.9, color: '#10b981', textColor: '#059669' },
+        { label: 'Exceptional (Elite)', min: 23.0, max: 25.0, color: '#fbbf24', textColor: '#d97706' },
+        { label: 'Superior / Assisted', min: 25.1, max: 40.0, color: '#ef4444', textColor: '#dc2626' }
       ];
     }
     if (config.slug === 'waist-to-hip-ratio-calculator') {
@@ -128,6 +138,9 @@ export default function DynamicCalculator({ config }: DynamicCalculatorProps) {
     }
     return undefined;
   };
+
+  const isNumericValue = typeof rawMainValue === 'number' || (typeof rawMainValue === 'string' && !isNaN(parseFloat(rawMainValue)));
+  const mainValue = isNumericValue ? (typeof rawMainValue === 'number' ? rawMainValue : parseFloat(rawMainValue)) : rawMainValue;
 
   return (
     <div className="bg-white dark:bg-gray-950 rounded-3xl border border-gray-100 dark:border-gray-900 shadow-xl overflow-hidden" id={`calc-card-${config.slug}`}>
@@ -264,11 +277,11 @@ export default function DynamicCalculator({ config }: DynamicCalculatorProps) {
             </h3>
 
             {/* Gauge visualization overlay */}
-            {typeof mainValue === 'number' ? (
+            {isNumericValue && typeof mainValue === 'number' ? (
               <GaugeChart
                 value={mainValue}
-                min={0}
-                max={Math.max(mainValue * 1.5, 10)}
+                min={config.slug === 'ffmi-calculator' ? 12 : 0}
+                max={config.slug === 'ffmi-calculator' ? 30 : Math.max(mainValue * 1.5, 10)}
                 unitLabel={mainOutput?.unit ?? ''}
                 title={mainOutput?.label ?? 'Metric'}
                 ranges={getCustomGaugeRanges()}
@@ -308,7 +321,7 @@ export default function DynamicCalculator({ config }: DynamicCalculatorProps) {
           {/* Clinician's explanation card summary */}
           {config.resultExplanation && (
             <div className="mt-6 p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10 text-xs text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
-              <div dangerouslySetInnerHTML={{ __html: config.resultExplanation(inputState, results, unit) }} />
+              <div dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(config.resultExplanation(inputState, results, unit)) }} />
             </div>
           )}
 

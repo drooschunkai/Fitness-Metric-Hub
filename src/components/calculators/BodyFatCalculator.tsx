@@ -503,7 +503,7 @@ export default function BodyFatCalculator() {
 
               {/* Dynamic Semicircle Gauge Visualizer */}
               <div className="flex flex-col items-center justify-center relative pt-4 border-t border-slate-100 dark:border-gray-800">
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">ACE Body Fat Gauge Spectrum (Ideal: {result.idealBfRange})</span>
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">ACSM/ACE Body Fat Gauge Spectrum (Ideal: {result.idealBfRange})</span>
                 
                 <svg viewBox="-20 0 240 115" className="w-full max-w-[300px]">
                   {/* Background Track to give a cohesive, premium dashboard look */}
